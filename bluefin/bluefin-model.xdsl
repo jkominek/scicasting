@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<smile version="1.0" id="Network2" numsamples="1000" discsamples="10000">
+	<nodes>
+		<cpt id="MH370_located_in_Bluefin_search_area">
+			<state id="Yes" />
+			<state id="No" />
+			<probabilities>0.1 0.9</probabilities>
+		</cpt>
+		<cpt id="Bluefin_collects_data_sufficient_for_spotting_MH370_on_first_pass">
+			<state id="Yes" />
+			<state id="No" />
+			<probabilities>0.9 0.09999999999999998</probabilities>
+		</cpt>
+		<cpt id="Bluefin_collects_data_sufficient_for_spotting_MH370_on_reanalysis">
+			<state id="Yes" />
+			<state id="No" />
+			<parents>Bluefin_collects_data_sufficient_for_spotting_MH370_on_first_pass</parents>
+			<probabilities>1 0 0.2 0.8</probabilities>
+		</cpt>
+		<cpt id="Data_reanalysis_considered_worthwhile">
+			<state id="Yes" />
+			<state id="No" />
+			<probabilities>0.99 0.01000000000000001</probabilities>
+		</cpt>
+		<deterministic id="MH370_located_by_reanalysis">
+			<state id="Yes" />
+			<state id="No" />
+			<parents>Bluefin_collects_data_sufficient_for_spotting_MH370_on_reanalysis MH370_located_in_Bluefin_search_area Data_reanalysis_considered_worthwhile</parents>
+			<resultingstates>Yes No No No No No No No</resultingstates>
+		</deterministic>
+		<deterministic id="MH370_located_on_first_pass_2">
+			<state id="Yes" />
+			<state id="No" />
+			<parents>Bluefin_collects_data_sufficient_for_spotting_MH370_on_first_pass MH370_located_in_Bluefin_search_area</parents>
+			<resultingstates>Yes No No No</resultingstates>
+		</deterministic>
+		<deterministic id="Bluefin_locates_MH370">
+			<state id="Yes" />
+			<state id="No" />
+			<parents>MH370_located_on_first_pass_2 MH370_located_by_reanalysis</parents>
+			<resultingstates>Yes Yes Yes No</resultingstates>
+		</deterministic>
+	</nodes>
+	<extensions>
+		<genie version="1.0" app="GeNIe 2.0.5219.0" name="Network2" faultnameformat="nodestate">
+			<node id="MH370_located_in_Bluefin_search_area">
+				<name>MH370 located in Bluefin search area</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>164 491 272 558</position>
+				<barchart active="true" width="162" height="68" />
+			</node>
+			<node id="MH370_located_on_first_pass_2">
+				<name>MH370 located on first pass</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>363 511 465 577</position>
+				<barchart active="true" width="128" height="68" />
+			</node>
+			<node id="MH370_located_by_reanalysis">
+				<name>MH370 located by reanalysis</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>332 657 434 723</position>
+				<barchart active="true" width="128" height="68" />
+			</node>
+			<node id="Bluefin_collects_data_sufficient_for_spotting_MH370_on_first_pass">
+				<name>If MH370 is in the area will Bluefin spot it on initial analysis of the data?</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>333 369 478 459</position>
+				<barchart active="true" width="128" height="96" />
+			</node>
+			<node id="Data_reanalysis_considered_worthwhile">
+				<name>Data reanalysis considered worthwhile</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>149 643 259 711</position>
+				<barchart active="true" width="128" height="89" />
+			</node>
+			<node id="Bluefin_collects_data_sufficient_for_spotting_MH370_on_reanalysis">
+				<name>If MH370 is in the area will Bluefin collect data sufficient to find it on reanalysis?</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>504 500 665 600</position>
+				<barchart active="true" width="159" height="107" />
+			</node>
+			<node id="Bluefin_locates_MH370">
+				<name>Bluefin locates MH370</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>527 659 620 719</position>
+				<barchart active="true" width="128" height="69" />
+			</node>
+			<textbox>
+				<caption>Sonar is well understood, and Bluefin\nwas using COTS sonar systems. Analysis should be well understood. Trying harder shouldn&apos;t matter much.</caption>
+				<font color="000000" name="Arial" size="8" />
+				<position>504 425 685 481</position>
+			</textbox>
+			<textbox>
+				<caption>This is already the most expensive search; what&apos;s some more money?</caption>
+				<font color="000000" name="Arial" size="8" />
+				<position>140 587 266 629</position>
+			</textbox>
+			<textbox>
+				<caption>There is a lot of ocean out there, and all the evidence that initially led them to the Bluefin search area turned out to be wrong.</caption>
+				<font color="000000" name="Arial" size="8" />
+				<position>136 431 293 487</position>
+			</textbox>
+			<textbox>
+				<caption>first OR reanalysis</caption>
+				<font color="000000" name="Arial" size="8" />
+				<position>553 638 643 652</position>
+			</textbox>
+		</genie>
+	</extensions>
+</smile>

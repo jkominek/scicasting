@@ -1,0 +1,10 @@
+GeNIe model for determining likelihood that
+NASA will successfully land a telepresence
+probe on venus' surface
+
+models:
+* NASA willingness to attempt the mission
+* launch slippages
+* likelihood of spacecraft failure
+
+turns out to mostly depend on willingness
