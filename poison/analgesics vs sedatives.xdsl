@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<smile version="1.0" id="Network1" numsamples="1000" discsamples="10000">
+	<nodes>
+		<cpt id="Analgesics">
+			<state id="Below_10_5" />
+			<state id="r10_5__11_0" />
+			<state id="r11_0__11_5" />
+			<state id="r11_5__12_0" />
+			<state id="r12_0__12_5" />
+			<state id="Above_12_5" />
+			<probabilities>0.05555555555555555 0.1111111111111111 0.1666666666666667 0.2222222222222222 0.2777777777777778 0.1666666666666666</probabilities>
+		</cpt>
+		<cpt id="Sedatives">
+			<state id="Below_10_5" />
+			<state id="r10_5__11_0" />
+			<state id="r11_0__11_5" />
+			<state id="r11_5__12_0" />
+			<state id="r12_0__12_5" />
+			<state id="Above_12_5" />
+			<probabilities>0.2649006622516557 0.3311258278145696 0.1986754966887417 0.1324503311258278 0.06622516556291391 0.006622516556291314</probabilities>
+		</cpt>
+		<cpt id="Analgesics___Sedatives">
+			<state id="Yes" />
+			<state id="No" />
+			<parents>Analgesics Sedatives</parents>
+			<probabilities>0.6 0.4 0 1 0 1 0 1 0 1 0 1 1 0 0.5 0.5 0 1 0 1 0 1 0 1 1 0 1 0 0.5 0.5 0 1 0 1 0 1 1 0 1 0 1 0 0.5 0.5 0 1 0 1 1 0 1 0 1 0 1 0 0.5 0.5 0 1 0 1 0 1 0 1 0 1 0 1 0.6 0.4</probabilities>
+		</cpt>
+	</nodes>
+	<extensions>
+		<genie version="1.0" app="GeNIe 2.0.5219.0" name="Network1" faultnameformat="nodestate">
+			<node id="Sedatives">
+				<name>2013 Sedatives</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>471 170 533 208</position>
+				<barchart active="true" width="128" height="126" />
+			</node>
+			<node id="Analgesics">
+				<name>2013 Analgesics</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>207 168 275 210</position>
+				<barchart active="true" width="128" height="126" />
+			</node>
+			<node id="Analgesics___Sedatives">
+				<name>Analgesics &gt; Sedatives</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>271 299 471 357</position>
+				<barchart active="true" width="128" height="64" />
+			</node>
+			<textbox>
+				<caption>2010 6.0%\n2011 6.1%\n2012 10.88%</caption>
+				<font color="000000" name="Arial" size="8" />
+				<position>569 126 633 168</position>
+			</textbox>
+			<textbox>
+				<caption>2010 11.5%\n2011 11.7%\n2012 12.46%</caption>
+				<font color="000000" name="Arial" size="8" />
+				<position>307 126 371 168</position>
+			</textbox>
+		</genie>
+	</extensions>
+</smile>

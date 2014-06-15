@@ -34,39 +34,39 @@ panstarrs_next  = Poisson('panstarrs_next', mu=panstarrs_mean)
 other_next      = Poisson('other_next', mu=other_mean)
 
 @deterministic()
-def perhalfyear(lin=linear_next,
+def lasthalf2014(lin=linear_next,
                 sw=spacewatch_next,
                 cata=catalina_next,
                 pan=panstarrs_next,
                 oth=other_next):
-    return lin + sw + cata + pan + oth
+    return 6 + lin + sw + cata + pan + oth
 
 @deterministic()
-def le10(count=perhalfyear):
+def le10(count=lasthalf2014):
     return count<=10
 
 @deterministic()
-def r11_20(count=perhalfyear):
+def r11_20(count=lasthalf2014):
     return 11<=count and count<20
 
 @deterministic()
-def r21_40(count=perhalfyear):
+def r21_40(count=lasthalf2014):
     return 21<=count and count<40
 
 @deterministic()
-def r41_60(count=perhalfyear):
+def r41_60(count=lasthalf2014):
     return 41<=count and count<60
 
 @deterministic()
-def gt60(count=perhalfyear):
+def gt60(count=lasthalf2014):
     return 60<count
 
 import pymc
-model = pymc.Model([le10, r11_20, r21_40, r41_60, gt60, perhalfyear,
+model = pymc.Model([le10, r11_20, r21_40, r41_60, gt60, lasthalf2014,
                     linear_next, spacewatch_next, catalina_next,
                     panstarrs_next, other_next
 
                 ])
 M = pymc.MCMC(model)
-M.sample(iter=20000, burn=2500)
+M.sample(iter=40000, burn=5000)
 M.summary()
