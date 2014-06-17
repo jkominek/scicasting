@@ -63,4 +63,9 @@ model = Model([after_june, before_july, days, days_mean, days_tau])
 
 M = MCMC(model)
 M.sample(iter=75000, burn=5000)
-M.summary()
+#M.summary()
+
+yes_pd = np.mean(M.trace('before_july')[:])
+no_pd = np.mean(M.trace('after_june')[:])
+probability = yes_pd / (yes_pd + no_pd)
+print probability
