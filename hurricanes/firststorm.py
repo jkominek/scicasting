@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
 from pymc import *
 import numpy as np
 
@@ -38,34 +38,49 @@ days_array = np.array(relative_days)
 simple_mean = np.mean(days_array)
 simple_stddev = np.std(days_array)
 
-days_mean = Uniform('days_mean', lower=-90, upper=90)
-days_tau = Uniform('days_tau', upper=1.0, lower=1.0/(simple_stddev*2)**2,
-                   value=1.0/simple_stddev**2)
+def predict(today, FORECAST_CLEAR):
+    days_mean = Uniform('days_mean', lower=-90, upper=90)
+    days_tau = Uniform('days_tau', upper=1.0, lower=1.0/(simple_stddev*2)**2,
+                       value=1.0/simple_stddev**2)
+    
+    days = Normal('days', mu=days_mean, tau=days_tau,
+                  value=days_array, observed=True)
+    
+    next_year = Normal('next_year', mu=days_mean, tau=days_tau)
+    
+    end_of_june = date(today.year, 6, 30)
+    today = (today - end_of_june).days
+    
+    @deterministic()
+    def before_july(next_year=next_year):
+        return next_year<=0
+        
+    @potential()
+    def not_before_today(next_year=next_year):
+        if next_year <= (today + FORECAST_CLEAR):
+            return -1e10
+        else:
+            return 0.0
 
-days = Normal('days', mu=days_mean, tau=days_tau,
-              value=days_array, observed=True)
+    model = Model([not_before_today, before_july, days, days_mean, days_tau])
 
-next_year = Normal('next_year', mu=days_mean, tau=days_tau)
+    M = MCMC(model)
+    M.sample(iter=70000, burn=10000, verbose=0)
+    return M
 
-today = date.today()
-end_of_june = date(today.year, 6, 30)
-today = (today - end_of_june).days
+# http://www.nhc.noaa.gov/
+# True if there is nothing with 48-hour formation
+# potential on the map
+FORECAST_48_HOUR_CLEAR = False
 
-@deterministic()
-def before_july(next_year=next_year):
-    return today<=next_year<=0
+M = predict(date.today(), 2 if FORECAST_48_HOUR_CLEAR else 0)
+print "Today"
+print np.mean(M.trace('before_july')[:])
 
-@deterministic()
-def after_june(next_year=next_year):
-    return 0<next_year
+M = predict(date.today()+timedelta(1), 1.5 if FORECAST_48_HOUR_CLEAR else 0)
+print "Tomorrow"
+print np.mean(M.trace('before_july')[:])
 
-model = Model([after_june, before_july, days, days_mean, days_tau])
-
-M = MCMC(model)
-M.sample(iter=75000, burn=5000)
-#M.summary()
-
-yes_pd = np.mean(M.trace('before_july')[:])
-no_pd = np.mean(M.trace('after_june')[:])
-probability = yes_pd / (yes_pd + no_pd)
-print probability
+M = predict(date.today()+timedelta(2), 0.25 if FORECAST_48_HOUR_CLEAR else 0)
+print "2 days from now"
+print np.mean(M.trace('before_july')[:])
