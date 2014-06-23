@@ -180,35 +180,35 @@ def do_weekday_model():
             out[i] = intercept + slope * xf + weekday[xf % 7]
         return out
 
-    @deterministic
-    def june_4(y=y_future):
-        for i in range(0, l_x):
-            xf = x_future[i]
-            if xf <= 180 and y[i]>4.0:
-                return True
-        return False
+    #@deterministic
+    #def june_4(y=y_future):
+    #    for i in range(0, l_x):
+    #        xf = x_future[i]
+    #        if xf <= 180 and y[i]>4.0:
+    #            return True
+    #    return False
 
-    @deterministic
-    def july_4(y=y_future):
-        for i in range(0, l_x):
-            xf = x_future[i]
-            if y[i]>4.0:
-                if xf <= 181:
-                    return False
-                if xf <= 211:
-                    return True
-        return False
+    #@deterministic
+    #def july_4(y=y_future):
+    #    for i in range(0, l_x):
+    #        xf = x_future[i]
+    #        if y[i]>4.0:
+    #            if xf <= 181:
+    #                return False
+    #            if xf <= 211:
+    #                return True
+    #    return False
 
-    @deterministic
-    def august_4(y=y_future):
-        for i in range(0, l_x):
-            xf = x_future[i]
-            if y[i]>4.0:
-                if xf <= 212:
-                    return False
-                if xf <= 242:
-                    return True
-        return False
+    #@deterministic
+    #def august_4(y=y_future):
+    #    for i in range(0, l_x):
+    #        xf = x_future[i]
+    #        if y[i]>4.0:
+    #            if xf <= 212:
+    #                return False
+    #            if xf <= 242:
+    #                return True
+    #    return False
 
     @deterministic
     def first_day(y=y_future):
@@ -222,7 +222,7 @@ def do_weekday_model():
                    intercept, slope, #june_4, july_4, august_4,
                    first_day])
     M = MCMC(model)
-    M.sample(iter=25000, burn=2500)
+    M.sample(iter=60000, burn=5000)
     return M
 
 M = do_weekday_model()
@@ -235,7 +235,7 @@ for day in trace:
     counts[day] = 1 + counts.get(day, 0)
 days = sorted(counts.keys(), key=lambda k: counts[k], reverse=True)
 total = float(len(trace))
-for d in days[0:10]:
+for d in days[0:20]:
     # our days of year were 0-indexed, instead of the normal
     # 1-indexed. bump them up for human display
     print "%i %.2f" % (d+1, counts[d]/total*100.0)
