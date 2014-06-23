@@ -65,7 +65,7 @@ def predict(today, FORECAST_CLEAR):
     model = Model([not_before_today, before_july, days, days_mean, days_tau])
 
     M = MCMC(model)
-    M.sample(iter=70000, burn=10000, verbose=0)
+    M.sample(iter=70000, burn=10000, verbose=0, progress_bar=False)
     return M
 
 # http://www.nhc.noaa.gov/
@@ -83,4 +83,12 @@ print np.mean(M.trace('before_july')[:])
 
 M = predict(date.today()+timedelta(2), 0.25 if FORECAST_48_HOUR_CLEAR else 0)
 print "2 days from now"
+print np.mean(M.trace('before_july')[:])
+
+M = predict(date.today()+timedelta(3), 0.0 if FORECAST_48_HOUR_CLEAR else 0)
+print "3 days from now"
+print np.mean(M.trace('before_july')[:])
+
+M = predict(date.today()+timedelta(4), 0.0 if FORECAST_48_HOUR_CLEAR else 0)
+print "4 days from now"
 print np.mean(M.trace('before_july')[:])
