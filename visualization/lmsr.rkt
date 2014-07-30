@@ -46,6 +46,7 @@
     (y-tick-lines)
     )
    #:x-label ""
+   #:y-label "-Cost"
    #:y-min (max -450
                 (min (lmsr-outcome start 0.01)
                      (lmsr-outcome start 0.99)
@@ -64,8 +65,8 @@
    (list
     (function (lambda (x)
                 (+ (* belief (lmsr-outcome start x))
-                      (* (- 1.0 belief)
-                         (lmsr-outcome (- 1.0 start) (- 1.0 x)))))
+                   (* (- 1.0 belief)
+                      (lmsr-outcome (- 1.0 start) (- 1.0 x)))))
               0.0 1.0)
     (x-ticks (list (tick belief #t "B")
                    (tick start #t "C")
@@ -81,6 +82,7 @@
     (y-tick-lines)
     )
    #:x-label ""
+   #:y-label "Expected"
    #:y-min -200))
 
 ; Given the current position, and a belief, plot the
@@ -108,6 +110,7 @@
     (x-tick-lines)
     )
    #:x-label ""
+   #:y-label "Expected / Cost"
    ))
 
 ; Plot Kelly-style odds
@@ -141,10 +144,74 @@
     (x-tick-lines)
     )
    #:x-label ""
+   #:y-label "Odds"
    ))
 
-(plot-from 0.036 0.17)
-(plot-expected-outcome 0.036 0.17)
-(plot-expected-outcome/cost 0.036 0.17)
-(plot-y-transform log-transform)
-(plot-odds 0.036)
+(define (plot-odds*gain start)
+  (plot
+   (list
+    (function
+     (lambda (x) (* (lmsr-outcome start x) (odds start x)))
+     start 1.0
+     #:label "Yes" #:color "green")
+    (function
+     (lambda (x) (* (lmsr-outcome (- 1 start) (- 1 x)) (odds (- 1 start) (- 1 x))))
+     0.0 start
+     #:label "No" #:color "red")
+    (x-ticks (list (tick start #t "C")
+                   (tick 0.0 #t "0%")
+                   (tick 0.1 #t "10%")
+                   (tick 0.25 #t "25%")
+                   (tick 0.5 #t "50%")
+                   (tick 0.75 #t "75%")
+                   (tick 0.9 #t "90%")
+                   (tick 1.0 #t "100%")
+                   ))
+    (x-tick-lines)
+    )
+   #:x-label ""
+   #:y-label "Odds*Gain"
+   #:y-min 0.1
+   ))
+
+(define (plot-odds*expected start belief)
+  ; eh. not sure this one makes sense.
+  (plot
+   (list
+    (function
+     (lambda (x) (* (lmsr-outcome start x)
+                    (+ (* belief (lmsr-outcome start x))
+                       (* (- 1.0 belief)
+                          (lmsr-outcome (- 1.0 start) (- 1.0 x))))))
+     start 1.0
+     #:label "Yes" #:color "green")
+    (function
+     (lambda (x) (* (lmsr-outcome (- 1 start) (- 1 x))
+                    (+ (* belief (lmsr-outcome start x))
+                       (* (- 1.0 belief)
+                          (lmsr-outcome (- 1.0 start) (- 1.0 x))))))
+     0.0 start
+     #:label "No" #:color "red")
+    (x-ticks (list (tick start #t "C")
+                   (tick 0.0 #t "0%")
+                   (tick 0.1 #t "10%")
+                   (tick 0.25 #t "25%")
+                   (tick 0.5 #t "50%")
+                   (tick 0.75 #t "75%")
+                   (tick 0.9 #t "90%")
+                   (tick 1.0 #t "100%")
+                   ))
+    (x-tick-lines)
+    )
+   #:x-label ""
+   #:y-label "Odds*Expected"
+   #:y-min 0.1
+   ))
+
+(plot-from 0.2 0.5)
+(plot-expected-outcome 0.2 0.5)
+(plot-expected-outcome/cost 0.2 0.5)
+;(plot-y-transform log-transform)
+(plot-odds 0.2)
+(plot-odds*gain 0.2)
+(plot-odds*expected 0.2 0.5)
