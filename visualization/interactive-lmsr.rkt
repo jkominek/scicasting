@@ -9,6 +9,7 @@
 
 (require racket/gui/base
          racket/class
+         racket/math
          plot)
 
 (define f
@@ -18,6 +19,7 @@
 
 (define initial-value (box 0.5))
 (define belief-value (box 0.5))
+(define trade-to-value (box 0.5))
 (define refresher (box #f))
 
 ; Do the probability division in log space, so we get fewer horrifying answers
@@ -59,8 +61,10 @@
 (define (drawer c dc)
   (define start (unbox initial-value))
   (define belief (unbox belief-value))
+  (define trade-to (unbox trade-to-value))
   (define x-ticks/initial (cons (tick start #t "i") basic-x-ticks))
-  (define x-ticks/belief (cons (tick belief #t "B") x-ticks/initial))
+  (define x-ticks/trade (cons (tick trade-to #t "T") x-ticks/initial))
+  (define x-ticks/belief (cons (tick belief #t "B") x-ticks/trade))
   
   ; Top left
   (plot/dc
@@ -69,8 +73,16 @@
               #:color "green")
     (function (lambda (x) (lmsr-outcome (- 1.0 start) (- 1.0 x))) 0.001 0.999
               #:color "red")
-    (point-label (vector 0.25 (lmsr-outcome start 0.25)) "Yes")
+    (point-label (vector 0.25 (lmsr-outcome start 0.25)) "Yes" #:anchor 'right)
     (point-label (vector 0.75 (lmsr-outcome (- 1.0 start) 0.25)) "No")
+    (let ([v (lmsr-outcome start trade-to)])
+      (point-label (vector trade-to v)
+                   (number->string (exact-round v))
+                   #:anchor (if (<= trade-to start) 'top 'bottom)))
+    (let ([v (lmsr-outcome (- 1.0 start) (- 1.0 trade-to))])
+      (point-label (vector trade-to v)
+                   (number->string (exact-round v))
+                   #:anchor (if (<= trade-to start) 'bottom 'top)))
     (x-ticks x-ticks/belief)
     basic-lines
     )
@@ -89,9 +101,15 @@
     (function
      (lambda (x)
        (+ (* belief (lmsr-outcome start x))
-                   (* (- 1.0 belief)
-                      (lmsr-outcome (- 1.0 start) (- 1.0 x)))))
+          (* (- 1.0 belief)
+             (lmsr-outcome (- 1.0 start) (- 1.0 x)))))
      0.001 0.999)
+    (let ([v (+ (* belief (lmsr-outcome start trade-to))
+                (* (- 1.0 belief)
+                   (lmsr-outcome (- 1.0 start) (- 1.0 trade-to))))])
+      (point-label (vector trade-to v)
+                   (number->string (exact-round v))
+                   #:anchor 'bottom))
     (x-ticks x-ticks/belief)
     basic-lines
     )
@@ -117,6 +135,18 @@
      (lambda (x) (odds (- 1 start) (- 1 x)))
      0.001 start
      #:label "No" #:color "red")
+    (if (= trade-to start)
+        (point-label (vector -100 -100) "")
+        (let ([v (if (< trade-to start)
+                     (odds (- 1 start) (- 1 trade-to))
+                     (odds start trade-to))])
+          (point-label (vector trade-to v)
+                       (let ([s (number->string v)])
+                         (if (< (string-length s) 4)
+                             s
+                             (substring s 0 4)))
+                       #:anchor (if (< trade-to start)
+                                    'left 'right))))
     (x-ticks x-ticks/belief)
     (cdr basic-lines))
    dc 5 (- (/ 720 2) 50) (- (/ 1280 2) 50) (- (/ 720 2) 50)
@@ -141,6 +171,22 @@
                           (lmsr-outcome (- 1.0 start) (- 1.0 x))))
                     (odds (- 1 start) (- 1 x))))
      0.001 start #:label "No" #:color "red")
+    (if (= trade-to start)
+        (point-label (vector -100 -100) "")
+        (let ([v (if (< trade-to start)
+                     (* (+ (* belief (lmsr-outcome start trade-to))
+                           (* (- 1.0 belief)
+                              (lmsr-outcome (- 1.0 start) (- 1.0 trade-to))))
+                        (odds (- 1 start) (- 1 trade-to)))
+                     (* (+ (* belief (lmsr-outcome start trade-to))
+                           (* (- 1.0 belief)
+                              (lmsr-outcome (- 1.0 start) (- 1.0 trade-to))))
+                        (odds start trade-to)))])
+          (point-label (vector trade-to v)
+                       (number->string (exact-round v))
+                       #:anchor (if (< trade-to start)
+                                    'left 'right))))
+
     (x-ticks x-ticks/belief)
     (cdr basic-lines))
    dc (/ 1280 2) (- (/ 720 2) 50) (- (/ 1280 2) 50) (- (/ 720 2) 50)
@@ -171,6 +217,16 @@
        [style '(horizontal horizontal-label plain)]
        [callback (lambda (s e)
                    (set-box! belief-value (/ (send s get-value) 100.0))
+                   ((unbox refresher)))]))
+(define trade-to-value-slider
+  (new slider% [parent vp]
+       [label "trade "]
+       [min-value 1]
+       [max-value 99]
+       [init-value 50]
+       [style '(horizontal horizontal-label plain)]
+       [callback (lambda (s e)
+                   (set-box! trade-to-value (/ (send s get-value) 100.0))
                    ((unbox refresher)))]))
 
 (define c
