@@ -1,0 +1,1154 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     49239,       1145]
+NotebookOptionsPosition[     47961,       1094]
+NotebookOutlinePosition[     48305,       1109]
+CellTagsIndexPosition[     48262,       1106]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"yesCost", "[", 
+   RowBox[{"i_", ",", "t_"}], "]"}], ":=", 
+  RowBox[{"100", "*", 
+   RowBox[{"Log", "[", 
+    RowBox[{"2", ",", 
+     RowBox[{"t", "/", "i"}]}], "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.6159812165989704`*^9, 3.615981235005023*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"noCost", "[", 
+   RowBox[{"i_", ",", "t_"}], "]"}], ":=", 
+  RowBox[{"100", "*", 
+   RowBox[{"Log", "[", 
+    RowBox[{"2", ",", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"100", "-", "t"}], ")"}], "/", 
+      RowBox[{"(", 
+       RowBox[{"100", "-", "i"}], ")"}]}]}], "]"}]}]}]], "Input"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Manipulate[
+  Plot[{yesCost[start,target],
+        noCost[start,target]},
+       {target,0.5,99.5},
+       ImageSize\[Rule]Large,
+       (* PlotLegends\[Rule]{Yes,No}, *)
+       AxesLabel\[Rule]{\"%\",Points},
+       PerformanceGoal\[Rule]\"Speed\",
+       PlotStyle\[Rule]{Green,Red},
+       PlotRange->{{0,100},Automatic},
+       GridLines -> {{start,tradeto,100-start},{}},
+       Ticks -> \
+{{0,10,25,50,75,90,100,{start,\"S\"},{tradeto,\"T\"}},Automatic},
+       Epilog->{Text[Round[yesCost[start,tradeto]],
+                     {tradeto,If[start<tradeto,15,-28]+yesCost[start,tradeto]}\
+],
+                Text[Round[noCost[start,tradeto]],
+                     {tradeto,If[start<tradeto,-28,15]+noCost[start,tradeto]}]
+               }
+       ],
+  {{start,N[33.3]},0.5,99.5,Appearance\[Rule]\"Labeled\"},
+  {{tradeto,N[66.6]},0.5,99.5,Appearance\[Rule]\"Labeled\"},
+  SaveDefinitions -> True]\
+\>", "Input",
+ CellChangeTimes->{{3.615945113275978*^9, 3.6159451529732485`*^9}, {
+   3.615945188030254*^9, 3.615945191191435*^9}, {3.6159452302056665`*^9, 
+   3.6159452680288296`*^9}, {3.615945310304248*^9, 3.6159453231169806`*^9}, {
+   3.6159453614051704`*^9, 3.615945394074039*^9}, {3.61594557382232*^9, 
+   3.615945616759776*^9}, {3.615945745255125*^9, 3.6159457506144323`*^9}, {
+   3.615945917141957*^9, 3.6159459223472548`*^9}, {3.6159460180757303`*^9, 
+   3.615946090900895*^9}, 3.615946144801978*^9, {3.6159468772498717`*^9, 
+   3.615946950206045*^9}, {3.615981224253408*^9, 3.615981248681805*^9}, {
+   3.6159812955054836`*^9, 3.6159812962895284`*^9}, {3.6159813387949595`*^9, 
+   3.615981339216984*^9}, {3.6159814541745586`*^9, 3.6159815715372715`*^9}, {
+   3.615981647194599*^9, 3.6159816825096188`*^9}, {3.6159820600792146`*^9, 
+   3.615982213355982*^9}, {3.615982256440446*^9, 3.615982279961791*^9}, {
+   3.6159824321764975`*^9, 3.6159824828553963`*^9}, {3.6159825636040144`*^9, 
+   3.6159825821780767`*^9}, {3.6159826611645947`*^9, 
+   3.6159827693807845`*^9}, {3.6159835658583403`*^9, 
+   3.6159836041335297`*^9}, {3.6159838407400627`*^9, 
+   3.6159839168284144`*^9}, {3.6159843631329412`*^9, 3.61598436818023*^9}, {
+   3.6159849539307337`*^9, 3.615984954551769*^9}, {3.6159880845497947`*^9, 
+   3.615988110729292*^9}, {3.6159882435498886`*^9, 3.6159882440499177`*^9}, {
+   3.615988281252045*^9, 3.61598828762941*^9}, {3.6159883497879653`*^9, 
+   3.615988363883772*^9}, {3.615992565268077*^9, 3.6159925725064907`*^9}, {
+   3.6159926661438465`*^9, 3.615992668183964*^9}},
+ CellID->124],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`start$$ = 33.3, $CellContext`tradeto$$ = 
+    66.6, Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`start$$], 33.3}, 0.5, 99.5}, {{
+       Hold[$CellContext`tradeto$$], 66.6}, 0.5, 99.5}}, Typeset`size$$ = {
+    576., {172., 176.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`start$283522$$ = 
+    0, $CellContext`tradeto$283523$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`start$$ = 33.3, $CellContext`tradeto$$ = 
+        66.6}, "ControllerVariables" :> {
+        Hold[$CellContext`start$$, $CellContext`start$283522$$, 0], 
+        Hold[$CellContext`tradeto$$, $CellContext`tradeto$283523$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Plot[{
+         $CellContext`yesCost[$CellContext`start$$, $CellContext`target], 
+         $CellContext`noCost[$CellContext`start$$, $CellContext`target]}, \
+{$CellContext`target, 0.5, 99.5}, ImageSize -> Large, 
+        AxesLabel -> {"%", $CellContext`Points}, PerformanceGoal -> "Speed", 
+        PlotStyle -> {Green, Red}, PlotRange -> {{0, 100}, Automatic}, 
+        GridLines -> {{$CellContext`start$$, $CellContext`tradeto$$, 
+           100 - $CellContext`start$$}, {}}, 
+        Ticks -> {{
+          0, 10, 25, 50, 75, 90, 
+           100, {$CellContext`start$$, "S"}, {$CellContext`tradeto$$, "T"}}, 
+          Automatic}, Epilog -> {
+          Text[
+           Round[
+            $CellContext`yesCost[$CellContext`start$$, \
+$CellContext`tradeto$$]], {$CellContext`tradeto$$, 
+            If[$CellContext`start$$ < $CellContext`tradeto$$, 
+              15, -28] + $CellContext`yesCost[$CellContext`start$$, \
+$CellContext`tradeto$$]}], 
+          Text[
+           Round[
+            $CellContext`noCost[$CellContext`start$$, \
+$CellContext`tradeto$$]], {$CellContext`tradeto$$, 
+            If[$CellContext`start$$ < $CellContext`tradeto$$, -28, 
+              15] + $CellContext`noCost[$CellContext`start$$, \
+$CellContext`tradeto$$]}]}], 
+      "Specifications" :> {{{$CellContext`start$$, 33.3}, 0.5, 99.5, 
+         Appearance -> "Labeled"}, {{$CellContext`tradeto$$, 66.6}, 0.5, 99.5,
+          Appearance -> "Labeled"}}, "Options" :> {}, "DefaultOptions" :> {}],
+     ImageSizeCache->{627., {231., 238.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`yesCost[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`t, 
+          Blank[]]] := 
+       100 Log[2, $CellContext`t/$CellContext`i], $CellContext`noCost[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`t, 
+          Blank[]]] := 
+       100 Log[2, (100 - $CellContext`t)/(100 - $CellContext`i)]}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{
+  3.6159452699529395`*^9, 3.61594532642717*^9, {3.6159453785971537`*^9, 
+   3.6159453951991034`*^9}, {3.6159455922213726`*^9, 3.615945619090909*^9}, 
+   3.6159457529535656`*^9, 3.6159459289116297`*^9, {3.615946068976641*^9, 
+   3.615946092683997*^9}, 3.6159461472571187`*^9, {3.615946924998603*^9, 
+   3.6159469509050846`*^9}, 3.6159812131047707`*^9, 3.615981249338843*^9, 
+   3.615981298489654*^9, 3.615981339905023*^9, {3.615981525678649*^9, 
+   3.6159815728263454`*^9}, {3.615981658139225*^9, 3.6159816831956577`*^9}, {
+   3.6159821034806967`*^9, 3.6159821505243874`*^9}, 3.6159821823532085`*^9, 
+   3.6159822153970985`*^9, {3.6159822602826653`*^9, 3.615982281851899*^9}, {
+   3.61598244865444*^9, 3.6159824838204513`*^9}, {3.6159825726765337`*^9, 
+   3.615982583233137*^9}, 3.6159826647798014`*^9, {3.6159827221970854`*^9, 
+   3.615982729397497*^9}, 3.6159827701048255`*^9, 3.6159835745178356`*^9, 
+   3.615983604892573*^9, {3.6159838551828885`*^9, 3.615983918561514*^9}, 
+   3.6159843688132668`*^9, 3.615984956115858*^9, 3.615988111508336*^9, 
+   3.615988244552946*^9, 3.615988288102437*^9, {3.615988338016292*^9, 
+   3.6159883643507986`*^9}, 3.615992573418543*^9, 3.615992670062071*^9, 
+   3.6159946902716203`*^9}]
+}, Open  ]],
+
+Cell["\<\
+expectedOutcome [i_,b_,t_,neg_:0,pos_:0] := (b/100)*(pos+yesCost[i,t]) + \
+(1-b/100)*(neg+noCost[i,t])\
+\>", "Input",
+ CellChangeTimes->{
+  3.615944513150653*^9, {3.615992439355875*^9, 3.615992472605777*^9}},
+ CellID->524],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Manipulate[
+  Plot[expectedOutcome[start,belief,target],
+       {target,0.5,99.5},
+       ImageSize->Large,
+       ColorFunctionScaling \[Rule] False,
+       AxesLabel\[Rule]{\"%\",\"Expected Points\"},
+       PlotRange->{{0,100},
+                   {-200,
+                    50+expectedOutcome[start,belief,belief]}},
+       ColorFunction \[Rule] Function[{x, y}, If[y > 0, Green, Red]],
+       GridLines -> {{start,belief},{expectedOutcome[start,belief,belief]}},
+       Ticks -> \
+{{0,10,25,50,75,90,100,{start,\"S\"},{belief,\"B\"}},Automatic},
+       Epilog->{Text[Round[expectedOutcome[start,belief,belief]],
+                     {belief,15+expectedOutcome[start,belief,belief]}]
+               }
+       ],
+  {{start,N[100/3]},1,99,1,Appearance\[Rule]\"Labeled\"},
+  {{belief,N[200/3]},1,99,1,Appearance\[Rule]\"Labeled\"},
+  SaveDefinitions->True]\
+\>", "Input",
+ CellChangeTimes->{{3.615983039508235*^9, 3.615983080389573*^9}, {
+   3.6159832032436*^9, 3.6159833545552545`*^9}, {3.6159834721849823`*^9, 
+   3.6159834722939887`*^9}, {3.615983548324337*^9, 3.6159835572668486`*^9}, {
+   3.6159837266905394`*^9, 3.6159837362560863`*^9}, {3.6159838239641027`*^9, 
+   3.6159838311615148`*^9}, {3.6159839603599043`*^9, 
+   3.6159840386273813`*^9}, {3.6159840696321545`*^9, 3.6159841639345484`*^9}, 
+   3.6159842080990744`*^9, {3.6159842813192625`*^9, 3.6159842817512865`*^9}, {
+   3.615984630707246*^9, 3.6159846378986573`*^9}, {3.615984948557426*^9, 
+   3.615984948883445*^9}, {3.6159924927599297`*^9, 3.615992501098407*^9}, 
+   3.6159925474120555`*^9},
+ CellID->525],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`belief$$ = 
+    66.66666666666667, $CellContext`start$$ = 33.333333333333336`, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`start$$], 33.333333333333336`}, 1, 99, 1}, {{
+       Hold[$CellContext`belief$$], 66.66666666666667}, 1, 99, 1}}, 
+    Typeset`size$$ = {576., {172., 176.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`start$283583$$ = 0, $CellContext`belief$283584$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`belief$$ = 
+        66.66666666666667, $CellContext`start$$ = 33.333333333333336`}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`start$$, $CellContext`start$283583$$, 0], 
+        Hold[$CellContext`belief$$, $CellContext`belief$283584$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Plot[
+        $CellContext`expectedOutcome[$CellContext`start$$, \
+$CellContext`belief$$, $CellContext`target], {$CellContext`target, 0.5, 99.5},
+         ImageSize -> Large, ColorFunctionScaling -> False, 
+        AxesLabel -> {"%", "Expected Points"}, 
+        PlotRange -> {{0, 
+          100}, {-200, 
+           50 + $CellContext`expectedOutcome[$CellContext`start$$, \
+$CellContext`belief$$, $CellContext`belief$$]}}, ColorFunction -> 
+        Function[{$CellContext`x, $CellContext`y}, 
+          If[$CellContext`y > 0, Green, Red]], 
+        GridLines -> {{$CellContext`start$$, $CellContext`belief$$}, {
+           $CellContext`expectedOutcome[$CellContext`start$$, \
+$CellContext`belief$$, $CellContext`belief$$]}}, 
+        Ticks -> {{
+          0, 10, 25, 50, 75, 90, 
+           100, {$CellContext`start$$, "S"}, {$CellContext`belief$$, "B"}}, 
+          Automatic}, Epilog -> {
+          Text[
+           Round[
+            $CellContext`expectedOutcome[$CellContext`start$$, \
+$CellContext`belief$$, $CellContext`belief$$]], {$CellContext`belief$$, 
+            15 + $CellContext`expectedOutcome[$CellContext`start$$, \
+$CellContext`belief$$, $CellContext`belief$$]}]}], 
+      "Specifications" :> {{{$CellContext`start$$, 33.333333333333336`}, 1, 
+         99, 1, Appearance -> 
+         "Labeled"}, {{$CellContext`belief$$, 66.66666666666667}, 1, 99, 1, 
+         Appearance -> "Labeled"}}, "Options" :> {}, "DefaultOptions" :> {}],
+     ImageSizeCache->{627., {231., 238.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`expectedOutcome[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`b, 
+          Blank[]], 
+         Pattern[$CellContext`t, 
+          Blank[]]] := ($CellContext`b/
+          100) $CellContext`yesCost[$CellContext`i, $CellContext`t] + (
+          1 - $CellContext`b/
+          100) $CellContext`noCost[$CellContext`i, $CellContext`t], \
+$CellContext`expectedOutcome[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`b, 
+          Blank[]], 
+         Pattern[$CellContext`t, 
+          Blank[]], 
+         Optional[
+          Pattern[$CellContext`neg, 
+           Blank[]], 0], 
+         Optional[
+          Pattern[$CellContext`pos, 
+           Blank[]], 0]] := ($CellContext`b/
+          100) ($CellContext`pos + $CellContext`yesCost[$CellContext`i, \
+$CellContext`t]) + (1 - $CellContext`b/
+          100) ($CellContext`neg + $CellContext`noCost[$CellContext`i, \
+$CellContext`t]), $CellContext`yesCost[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`t, 
+          Blank[]]] := 
+       100 Log[2, $CellContext`t/$CellContext`i], $CellContext`noCost[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`t, 
+          Blank[]]] := 
+       100 Log[2, (100 - $CellContext`t)/(100 - $CellContext`i)]}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{
+  3.6159443255459228`*^9, 3.615945028527131*^9, 3.6159450673493514`*^9, 
+   3.61594519548468*^9, 3.615983081160617*^9, {3.6159832781148825`*^9, 
+   3.615983288814494*^9}, 3.6159833552572947`*^9, 3.615983472987028*^9, 
+   3.6159835578428817`*^9, 3.6159837370061293`*^9, 3.615983832342582*^9, {
+   3.615983961821988*^9, 3.615983975261757*^9}, 3.6159840255216312`*^9, {
+   3.6159840996178694`*^9, 3.6159841644575777`*^9}, 3.615984209726167*^9, 
+   3.6159842824143248`*^9, 3.6159846384506893`*^9, 3.615984959565056*^9, 
+   3.6159925022414722`*^9, 3.615992550346224*^9, 3.615994690425629*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Manipulate[
+  Plot[expectedOutcome[start,belief,target]/-cost[start,target],
+       {target,0.5,99.5},
+       ImageSize->Large,
+       AxesLabel\[Rule]{\"%\",\"Expected/Cost\"},
+       PlotStyle->Green,
+       GridLines -> {{start,belief},{expectedOutcome[start,belief,belief]}},
+       Ticks -> \
+{{0,10,25,50,75,90,100,{start,\"S\"},{belief,\"B\"}},Automatic},
+       Epilog->{Text[Round[expectedOutcome[start,belief,belief]],
+                     {belief,15+expectedOutcome[start,belief,belief]}]
+               },
+       PlotRange->{{0,100},{0,Automatic}}],
+  {{start,N[100/3]},0.5,99.5,Appearance\[Rule]\"Labeled\"},
+  {{belief,N[200/3]},0.5,99.5,Appearance\[Rule]\"Labeled\"},
+  SaveDefinitions->True]\
+\>", "Input",
+ CellChangeTimes->{{3.615984432088886*^9, 3.615984463097659*^9}, {
+  3.615984534767759*^9, 3.615984600068494*^9}, {3.6159846458221107`*^9, 
+  3.615984653013522*^9}, {3.615984683505266*^9, 3.615984696765024*^9}, {
+  3.615984937819812*^9, 3.6159849412260065`*^9}, {3.6159857416637893`*^9, 
+  3.6159857425418396`*^9}},
+ CellID->591],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`belief$$ = 
+    66.66666666666667, $CellContext`start$$ = 33.333333333333336`, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`start$$], 33.333333333333336`}, 0.5, 99.5}, {{
+       Hold[$CellContext`belief$$], 66.66666666666667}, 0.5, 99.5}}, 
+    Typeset`size$$ = {576., {178., 182.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`start$283642$$ = 0, $CellContext`belief$283643$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`belief$$ = 
+        66.66666666666667, $CellContext`start$$ = 33.333333333333336`}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`start$$, $CellContext`start$283642$$, 0], 
+        Hold[$CellContext`belief$$, $CellContext`belief$283643$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Plot[$CellContext`expectedOutcome[$CellContext`start$$, \
+$CellContext`belief$$, \
+$CellContext`target]/(-$CellContext`cost[$CellContext`start$$, \
+$CellContext`target]), {$CellContext`target, 0.5, 99.5}, ImageSize -> Large, 
+        AxesLabel -> {"%", "Expected/Cost"}, PlotStyle -> Green, 
+        GridLines -> {{$CellContext`start$$, $CellContext`belief$$}, {
+           $CellContext`expectedOutcome[$CellContext`start$$, \
+$CellContext`belief$$, $CellContext`belief$$]}}, 
+        Ticks -> {{
+          0, 10, 25, 50, 75, 90, 
+           100, {$CellContext`start$$, "S"}, {$CellContext`belief$$, "B"}}, 
+          Automatic}, Epilog -> {
+          Text[
+           Round[
+            $CellContext`expectedOutcome[$CellContext`start$$, \
+$CellContext`belief$$, $CellContext`belief$$]], {$CellContext`belief$$, 
+            15 + $CellContext`expectedOutcome[$CellContext`start$$, \
+$CellContext`belief$$, $CellContext`belief$$]}]}, 
+        PlotRange -> {{0, 100}, {0, Automatic}}], 
+      "Specifications" :> {{{$CellContext`start$$, 33.333333333333336`}, 0.5, 
+         99.5, Appearance -> 
+         "Labeled"}, {{$CellContext`belief$$, 66.66666666666667}, 0.5, 99.5, 
+         Appearance -> "Labeled"}}, "Options" :> {}, "DefaultOptions" :> {}],
+     ImageSizeCache->{627., {237., 244.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`expectedOutcome[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`b, 
+          Blank[]], 
+         Pattern[$CellContext`t, 
+          Blank[]]] := ($CellContext`b/
+          100) $CellContext`yesCost[$CellContext`i, $CellContext`t] + (
+          1 - $CellContext`b/
+          100) $CellContext`noCost[$CellContext`i, $CellContext`t], \
+$CellContext`expectedOutcome[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`b, 
+          Blank[]], 
+         Pattern[$CellContext`t, 
+          Blank[]], 
+         Optional[
+          Pattern[$CellContext`neg, 
+           Blank[]], 0], 
+         Optional[
+          Pattern[$CellContext`pos, 
+           Blank[]], 0]] := ($CellContext`b/
+          100) ($CellContext`pos + $CellContext`yesCost[$CellContext`i, \
+$CellContext`t]) + (1 - $CellContext`b/
+          100) ($CellContext`neg + $CellContext`noCost[$CellContext`i, \
+$CellContext`t]), $CellContext`yesCost[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`t, 
+          Blank[]]] := 
+       100 Log[2, $CellContext`t/$CellContext`i], $CellContext`noCost[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`t, 
+          Blank[]]] := 
+       100 Log[2, (100 - $CellContext`t)/(
+          100 - $CellContext`i)], $CellContext`cost[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`t, 
+          Blank[]]] := Min[
+         $CellContext`yesCost[$CellContext`i, $CellContext`t], 
+         $CellContext`noCost[$CellContext`i, $CellContext`t]]}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{
+  3.615944325732933*^9, 3.6159450285661335`*^9, 3.615945067458358*^9, 
+   3.6159451955586843`*^9, 3.6159844636776924`*^9, {3.6159845462284145`*^9, 
+   3.6159845689047112`*^9}, 3.6159846007275314`*^9, 3.6159846535765543`*^9, {
+   3.615984686660446*^9, 3.6159846973430576`*^9}, {3.6159849428591003`*^9, 
+   3.6159849623302135`*^9}, 3.615986885157193*^9, 3.6159946904656315`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Manipulate[
+  Row[{
+    Plot[expectedOutcome[start,belief,target],
+         {target,0.5,99.5},
+         ImageSize->Large,
+         ColorFunctionScaling \[Rule] False,
+         AxesLabel\[Rule]{\"%\",\"Expected Points\"},
+         PlotRange->{{0,100},
+                     {-200,
+                      50+expectedOutcome[start,belief,belief]}},
+         ColorFunction \[Rule] Function[{x, y}, If[y > 0, Green, Red]],
+         GridLines -> {{start,belief},{expectedOutcome[start,belief,belief]}},
+         Ticks -> \
+{{0,10,25,50,75,90,100,{start,\"S\"},{belief,\"B\"}},Automatic},
+         Epilog->{Text[Round[expectedOutcome[start,belief,belief]],
+                       {belief,15+expectedOutcome[start,belief,belief]}]}
+         ],
+    Plot[expectedOutcome[start,belief,target]/-cost[start,target],
+         {target,0.5,99.5},
+         ImageSize->Large,
+         PlotStyle->Green,
+         AxesLabel\[Rule]{\"%\",\"Expected/Cost\"},
+         GridLines -> {{start,belief},{expectedOutcome[start,belief,belief]}},
+         Ticks -> \
+{{0,10,25,50,75,90,100,{start,\"S\"},{belief,\"B\"}},Automatic},
+         Epilog->{Text[Round[expectedOutcome[start,belief,belief]],
+                       {belief,15+expectedOutcome[start,belief,belief]}]},
+         PlotRange->{{0,100},{0,Automatic}}]
+  }],
+{{start,N[100/3]},0.5,99.5,Appearance\[Rule]\"Labeled\"},
+{{belief,N[200/3]},0.5,99.5,Appearance\[Rule]\"Labeled\"},
+SaveDefinitions->True]\
+\>", "Input",
+ CellChangeTimes->{{3.615984827552505*^9, 3.6159849196807747`*^9}, {
+  3.6159849719927664`*^9, 3.615985037359505*^9}, {3.6159851460607224`*^9, 
+  3.615985147142784*^9}, {3.6159857466700754`*^9, 3.6159857476321306`*^9}},
+ CellID->594],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`belief$$ = 
+    66.66666666666667, $CellContext`start$$ = 33.333333333333336`, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`start$$], 33.333333333333336`}, 0.5, 99.5}, {{
+       Hold[$CellContext`belief$$], 66.66666666666667}, 0.5, 99.5}}, 
+    Typeset`size$$ = {584.5, {564., 176.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`start$283702$$ = 0, $CellContext`belief$283703$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`belief$$ = 
+        66.66666666666667, $CellContext`start$$ = 33.333333333333336`}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`start$$, $CellContext`start$283702$$, 0], 
+        Hold[$CellContext`belief$$, $CellContext`belief$283703$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Row[{
+         Plot[
+          $CellContext`expectedOutcome[$CellContext`start$$, \
+$CellContext`belief$$, $CellContext`target], {$CellContext`target, 0.5, 99.5},
+           ImageSize -> Large, ColorFunctionScaling -> False, 
+          AxesLabel -> {"%", "Expected Points"}, 
+          PlotRange -> {{0, 
+            100}, {-200, 
+             50 + $CellContext`expectedOutcome[$CellContext`start$$, \
+$CellContext`belief$$, $CellContext`belief$$]}}, ColorFunction -> 
+          Function[{$CellContext`x, $CellContext`y}, 
+            If[$CellContext`y > 0, Green, Red]], 
+          GridLines -> {{$CellContext`start$$, $CellContext`belief$$}, {
+             $CellContext`expectedOutcome[$CellContext`start$$, \
+$CellContext`belief$$, $CellContext`belief$$]}}, 
+          Ticks -> {{
+            0, 10, 25, 50, 75, 90, 
+             100, {$CellContext`start$$, "S"}, {$CellContext`belief$$, "B"}}, 
+            Automatic}, Epilog -> {
+            Text[
+             Round[
+              $CellContext`expectedOutcome[$CellContext`start$$, \
+$CellContext`belief$$, $CellContext`belief$$]], {$CellContext`belief$$, 
+              15 + $CellContext`expectedOutcome[$CellContext`start$$, \
+$CellContext`belief$$, $CellContext`belief$$]}]}], 
+         Plot[$CellContext`expectedOutcome[$CellContext`start$$, \
+$CellContext`belief$$, \
+$CellContext`target]/(-$CellContext`cost[$CellContext`start$$, \
+$CellContext`target]), {$CellContext`target, 0.5, 99.5}, ImageSize -> Large, 
+          PlotStyle -> Green, AxesLabel -> {"%", "Expected/Cost"}, 
+          GridLines -> {{$CellContext`start$$, $CellContext`belief$$}, {
+             $CellContext`expectedOutcome[$CellContext`start$$, \
+$CellContext`belief$$, $CellContext`belief$$]}}, 
+          Ticks -> {{
+            0, 10, 25, 50, 75, 90, 
+             100, {$CellContext`start$$, "S"}, {$CellContext`belief$$, "B"}}, 
+            Automatic}, Epilog -> {
+            Text[
+             Round[
+              $CellContext`expectedOutcome[$CellContext`start$$, \
+$CellContext`belief$$, $CellContext`belief$$]], {$CellContext`belief$$, 
+              15 + $CellContext`expectedOutcome[$CellContext`start$$, \
+$CellContext`belief$$, $CellContext`belief$$]}]}, 
+          PlotRange -> {{0, 100}, {0, Automatic}}]}], 
+      "Specifications" :> {{{$CellContext`start$$, 33.333333333333336`}, 0.5, 
+         99.5, Appearance -> 
+         "Labeled"}, {{$CellContext`belief$$, 66.66666666666667}, 0.5, 99.5, 
+         Appearance -> "Labeled"}}, "Options" :> {}, "DefaultOptions" :> {}],
+     ImageSizeCache->{636., {427., 434.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`expectedOutcome[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`b, 
+          Blank[]], 
+         Pattern[$CellContext`t, 
+          Blank[]]] := ($CellContext`b/
+          100) $CellContext`yesCost[$CellContext`i, $CellContext`t] + (
+          1 - $CellContext`b/
+          100) $CellContext`noCost[$CellContext`i, $CellContext`t], \
+$CellContext`expectedOutcome[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`b, 
+          Blank[]], 
+         Pattern[$CellContext`t, 
+          Blank[]], 
+         Optional[
+          Pattern[$CellContext`neg, 
+           Blank[]], 0], 
+         Optional[
+          Pattern[$CellContext`pos, 
+           Blank[]], 0]] := ($CellContext`b/
+          100) ($CellContext`pos + $CellContext`yesCost[$CellContext`i, \
+$CellContext`t]) + (1 - $CellContext`b/
+          100) ($CellContext`neg + $CellContext`noCost[$CellContext`i, \
+$CellContext`t]), $CellContext`yesCost[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`t, 
+          Blank[]]] := 
+       100 Log[2, $CellContext`t/$CellContext`i], $CellContext`noCost[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`t, 
+          Blank[]]] := 
+       100 Log[2, (100 - $CellContext`t)/(
+          100 - $CellContext`i)], $CellContext`cost[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`t, 
+          Blank[]]] := Min[
+         $CellContext`yesCost[$CellContext`i, $CellContext`t], 
+         $CellContext`noCost[$CellContext`i, $CellContext`t]]}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{
+  3.615944325954946*^9, 3.6159450287731447`*^9, 3.6159450675923653`*^9, 
+   3.6159451957696967`*^9, {3.6159848939223013`*^9, 3.6159849214838777`*^9}, 
+   3.6159849690755997`*^9, 3.6159850377475276`*^9, 3.6159927243331747`*^9, 
+   3.615994690602639*^9}]
+}, Open  ]],
+
+Cell["\<\
+odds[initial_,target_]:=
+  With[{gain=100*Log[2,target/initial],
+        loss=100*Log[2,(100-target)/(100-initial)]},
+       If[gain>0>loss,
+          (gain)/(-loss),
+          Undefined]]\
+\>", "Input",
+ CellChangeTimes->{
+  3.615985645356281*^9, {3.615985974569111*^9, 3.6159859755921693`*^9}, {
+   3.615986013843357*^9, 3.6159860649872823`*^9}},
+ CellID->611],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Manipulate[
+  Plot[{1+odds[start,target],
+        1+odds[100-start,100-target]},
+       {target,0.5,99.5},
+       PlotStyle\[Rule]{Green,Red},
+       ImageSize\[Rule]Large,
+       AxesLabel->{\"%\",\"Decimal Odds\"},
+       GridLines -> {{start},{2}},
+       Ticks -> {{0,10,25,50,75,90,100,{start,\"S\"}},Automatic},
+       PlotRange->{{0,100},{1,Automatic}}],
+  {{start,50},0.5,99.5,Appearance\[Rule]\"Labeled\"}]\
+\>", "Input",
+ CellChangeTimes->{{3.6159850898125057`*^9, 3.615985195962577*^9}, {
+   3.615985288622877*^9, 3.615985301564617*^9}, 3.6159853606589966`*^9, {
+   3.6159856473083925`*^9, 3.615985647637411*^9}, 3.6159856852155604`*^9, 
+   3.6159857520863853`*^9, {3.615986270637045*^9, 3.615986289530125*^9}, {
+   3.6159863241171036`*^9, 3.6159863251801643`*^9}},
+ CellID->612],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`start$$ = 50, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`start$$], 50}, 0.5, 99.5}}, Typeset`size$$ = {
+    576., {178., 182.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`start$283791$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`start$$ = 50}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`start$$, $CellContext`start$283791$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Plot[{1 + $CellContext`odds[$CellContext`start$$, $CellContext`target], 
+         1 + $CellContext`odds[
+          100 - $CellContext`start$$, 
+           100 - $CellContext`target]}, {$CellContext`target, 0.5, 99.5}, 
+        PlotStyle -> {Green, Red}, ImageSize -> Large, 
+        AxesLabel -> {"%", "Decimal Odds"}, 
+        GridLines -> {{$CellContext`start$$}, {2}}, 
+        Ticks -> {{0, 10, 25, 50, 75, 90, 100, {$CellContext`start$$, "S"}}, 
+          Automatic}, PlotRange -> {{0, 100}, {1, Automatic}}], 
+      "Specifications" :> {{{$CellContext`start$$, 50}, 0.5, 99.5, Appearance -> 
+         "Labeled"}}, "Options" :> {}, "DefaultOptions" :> {}],
+     ImageSizeCache->{627., {223., 230.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{
+  3.61594432602195*^9, 3.615945028816148*^9, 3.6159450676333675`*^9, 
+   3.615945195815699*^9, 3.615985129262762*^9, 3.615985198010694*^9, {
+   3.6159852943842063`*^9, 3.6159853022706575`*^9}, 3.6159853619950733`*^9, {
+   3.6159856480864367`*^9, 3.615985686338625*^9}, 3.615985755612587*^9, 
+   3.615985984324669*^9, {3.6159860328194427`*^9, 3.6159860362776403`*^9}, 
+   3.6159860711516347`*^9, {3.6159862763443713`*^9, 3.6159862906221876`*^9}, 
+   3.615986325484182*^9, 3.6159946908016505`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\n", "  ", 
+  RowBox[{
+   RowBox[{"Plot", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"expectedOutcome", "[", 
+         RowBox[{"start", ",", "belief", ",", "target"}], "]"}], "*", 
+        RowBox[{"(", 
+         RowBox[{"1", "+", 
+          RowBox[{"odds", "[", 
+           RowBox[{"start", ",", "target"}], "]"}]}], ")"}]}], ",", "\n", 
+       "        ", 
+       RowBox[{
+        RowBox[{"expectedOutcome", "[", 
+         RowBox[{"start", ",", "belief", ",", "target"}], "]"}], "*", 
+        RowBox[{"(", 
+         RowBox[{"1", "+", 
+          RowBox[{"odds", "[", 
+           RowBox[{
+            RowBox[{"100", "-", "start"}], ",", 
+            RowBox[{"100", "-", "target"}]}], "]"}]}], ")"}]}]}], "}"}], ",", 
+     "\n", "       ", 
+     RowBox[{"{", 
+      RowBox[{"target", ",", "0.5", ",", "99.5"}], "}"}], ",", "\n", 
+     "       ", 
+     RowBox[{"PlotStyle", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"Green", ",", "Red"}], "}"}]}], ",", "\n", "       ", 
+     RowBox[{"ImageSize", "\[Rule]", "Large"}], ",", "\n", "       ", 
+     RowBox[{"AxesLabel", "->", 
+      RowBox[{"{", 
+       RowBox[{"\"\<%\>\"", ",", "\"\<Expected*Odds\>\""}], "}"}]}], ",", 
+     "\n", "       ", 
+     RowBox[{"GridLines", " ", "->", " ", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"start", ",", "belief"}], "}"}], ",", 
+        RowBox[{"{", "}"}]}], "}"}]}], ",", "\n", "       ", 
+     RowBox[{"Ticks", " ", "->", " ", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+         "0", ",", "10", ",", "25", ",", "50", ",", "75", ",", "90", ",", 
+          "100", ",", 
+          RowBox[{"{", 
+           RowBox[{"start", ",", "\"\<S\>\""}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"belief", ",", "\"\<B\>\""}], "}"}]}], "}"}], ",", 
+        "Automatic"}], "}"}]}], ",", "\n", "       ", 
+     RowBox[{"PlotRange", "->", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"0", ",", "100"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"0", ",", "Automatic"}], "}"}]}], "}"}]}]}], "]"}], ",", 
+   "\n", "  ", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"start", ",", 
+       RowBox[{"N", "[", 
+        RowBox[{"100", "/", "3"}], "]"}]}], "}"}], ",", "0.5", ",", "99.5", 
+     ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"belief", ",", 
+       RowBox[{"N", "[", 
+        RowBox[{"200", "/", "3"}], "]"}]}], "}"}], ",", "0.5", ",", "99.5", 
+     ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"SaveDefinitions", "\[Rule]", "True"}]}], "\[IndentingNewLine]", 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.6159863838075175`*^9, 3.61598647738087*^9}, {
+  3.615986720287763*^9, 3.6159867511805305`*^9}, {3.615986834330286*^9, 
+  3.6159868417277093`*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`belief$$ = 
+    66.66666666666667, $CellContext`start$$ = 33.333333333333336`, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`start$$], 33.333333333333336`}, 0.5, 99.5}, {{
+       Hold[$CellContext`belief$$], 66.66666666666667}, 0.5, 99.5}}, 
+    Typeset`size$$ = {576., {177., 182.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`start$283845$$ = 0, $CellContext`belief$283846$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`belief$$ = 
+        66.66666666666667, $CellContext`start$$ = 33.333333333333336`}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`start$$, $CellContext`start$283845$$, 0], 
+        Hold[$CellContext`belief$$, $CellContext`belief$283846$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Plot[{$CellContext`expectedOutcome[$CellContext`start$$, \
+$CellContext`belief$$, $CellContext`target] (
+          1 + $CellContext`odds[$CellContext`start$$, $CellContext`target]), \
+$CellContext`expectedOutcome[$CellContext`start$$, $CellContext`belief$$, \
+$CellContext`target] (
+          1 + $CellContext`odds[
+           100 - $CellContext`start$$, 
+            100 - $CellContext`target])}, {$CellContext`target, 0.5, 99.5}, 
+        PlotStyle -> {Green, Red}, ImageSize -> Large, 
+        AxesLabel -> {"%", "Expected*Odds"}, 
+        GridLines -> {{$CellContext`start$$, $CellContext`belief$$}, {}}, 
+        Ticks -> {{
+          0, 10, 25, 50, 75, 90, 
+           100, {$CellContext`start$$, "S"}, {$CellContext`belief$$, "B"}}, 
+          Automatic}, PlotRange -> {{0, 100}, {0, Automatic}}], 
+      "Specifications" :> {{{$CellContext`start$$, 33.333333333333336`}, 0.5, 
+         99.5, Appearance -> 
+         "Labeled"}, {{$CellContext`belief$$, 66.66666666666667}, 0.5, 99.5, 
+         Appearance -> "Labeled"}}, "Options" :> {}, "DefaultOptions" :> {}],
+     ImageSizeCache->{627., {237., 244.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`expectedOutcome[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`b, 
+          Blank[]], 
+         Pattern[$CellContext`t, 
+          Blank[]]] := ($CellContext`b/
+          100) $CellContext`yesCost[$CellContext`i, $CellContext`t] + (
+          1 - $CellContext`b/
+          100) $CellContext`noCost[$CellContext`i, $CellContext`t], \
+$CellContext`expectedOutcome[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`b, 
+          Blank[]], 
+         Pattern[$CellContext`t, 
+          Blank[]], 
+         Optional[
+          Pattern[$CellContext`neg, 
+           Blank[]], 0], 
+         Optional[
+          Pattern[$CellContext`pos, 
+           Blank[]], 0]] := ($CellContext`b/
+          100) ($CellContext`pos + $CellContext`yesCost[$CellContext`i, \
+$CellContext`t]) + (1 - $CellContext`b/
+          100) ($CellContext`neg + $CellContext`noCost[$CellContext`i, \
+$CellContext`t]), $CellContext`yesCost[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`t, 
+          Blank[]]] := 
+       100 Log[2, $CellContext`t/$CellContext`i], $CellContext`noCost[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`t, 
+          Blank[]]] := 
+       100 Log[2, (100 - $CellContext`t)/(
+          100 - $CellContext`i)], $CellContext`odds[
+         Pattern[$CellContext`initial, 
+          Blank[]], 
+         Pattern[$CellContext`target, 
+          Blank[]]] := 
+       With[{$CellContext`gain = 
+          100 Log[2, $CellContext`target/$CellContext`initial], \
+$CellContext`loss = 
+          100 Log[2, (100 - $CellContext`target)/(
+             100 - $CellContext`initial)]}, 
+         If[$CellContext`gain > 
+          0 > $CellContext`loss, $CellContext`gain/(-$CellContext`loss), 
+          Undefined]]}; Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{{3.6159864146162796`*^9, 3.615986439046677*^9}, {
+   3.6159864727776065`*^9, 3.6159864781969166`*^9}, 3.615986754709732*^9, {
+   3.615986831168105*^9, 3.6159868434838095`*^9}, 3.6159946909376583`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\n", "  ", 
+  RowBox[{
+   RowBox[{"Plot", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"100", "/", 
+        RowBox[{"(", 
+         RowBox[{"1", "+", 
+          RowBox[{"odds", "[", 
+           RowBox[{"start", ",", "target"}], "]"}]}], ")"}]}], ",", "\n", 
+       "       ", 
+       RowBox[{"100", "/", 
+        RowBox[{"(", " ", 
+         RowBox[{"1", "+", 
+          RowBox[{"odds", "[", 
+           RowBox[{
+            RowBox[{"100", "-", "start"}], ",", 
+            RowBox[{"100", "-", "target"}]}], "]"}]}], ")"}]}]}], "}"}], ",", 
+     "\n", "       ", 
+     RowBox[{"{", 
+      RowBox[{"target", ",", "0.5", ",", "99.5"}], "}"}], ",", "\n", 
+     "       ", 
+     RowBox[{"PlotStyle", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"Green", ",", "Red"}], "}"}]}], ",", "\n", "       ", 
+     RowBox[{"ImageSize", "\[Rule]", "Large"}], ",", "\n", "       ", 
+     RowBox[{"AxesLabel", "->", 
+      RowBox[{"{", 
+       RowBox[{"\"\<%\>\"", ",", "\"\<Win %\>\""}], "}"}]}], ",", "\n", 
+     "       ", 
+     RowBox[{"GridLines", " ", "->", " ", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"start", ",", "tradeto"}], "}"}], ",", "\[IndentingNewLine]",
+         "                             ", 
+        RowBox[{"{", 
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{"start", "<", "tradeto"}], ",", "\[IndentingNewLine]", 
+           "                                 ", 
+           RowBox[{"100", "/", 
+            RowBox[{"(", 
+             RowBox[{"1", "+", 
+              RowBox[{"odds", "[", 
+               RowBox[{"start", ",", "tradeto"}], "]"}]}], ")"}]}], ",", 
+           "\[IndentingNewLine]", "                                 ", 
+           RowBox[{"100", "/", 
+            RowBox[{"(", 
+             RowBox[{"1", "+", 
+              RowBox[{"odds", "[", 
+               RowBox[{
+                RowBox[{"100", "-", "start"}], ",", 
+                RowBox[{"100", "-", "tradeto"}]}], "]"}]}], ")"}]}]}], "]"}], 
+         "}"}]}], "}"}]}], ",", "\n", "       ", 
+     RowBox[{"Ticks", " ", "->", " ", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+         "0", ",", "10", ",", "25", ",", "50", ",", "75", ",", "90", ",", 
+          "100", ",", 
+          RowBox[{"{", 
+           RowBox[{"start", ",", "\"\<S\>\""}], "}"}]}], "}"}], ",", 
+        "Automatic"}], "}"}]}], ",", "\n", "       ", 
+     RowBox[{"PlotRange", "->", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"0", ",", "100"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"0", ",", "100"}], "}"}]}], "}"}]}]}], "]"}], ",", "\n", 
+   "  ", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"start", ",", 
+       RowBox[{"N", "[", "25", "]"}]}], "}"}], ",", "0.5", ",", "99.5", ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"tradeto", ",", 
+       RowBox[{"N", "[", "75", "]"}]}], "}"}], ",", "0.5", ",", "99.5", ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}]}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.6159871111471195`*^9, 3.6159871601929245`*^9}, {
+  3.61598719088468*^9, 3.615987226646725*^9}, {3.6159875469480457`*^9, 
+  3.6159875472760644`*^9}, {3.615987580644973*^9, 3.615987747929541*^9}, {
+  3.6159878068299103`*^9, 3.615987809540065*^9}, {3.6159878916187596`*^9, 
+  3.615987903565443*^9}, {3.615987955217397*^9, 3.6159879579185514`*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`start$$ = 25., $CellContext`tradeto$$ = 75.,
+     Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`start$$], 25.}, 0.5, 99.5}, {{
+       Hold[$CellContext`tradeto$$], 75.}, 0.5, 99.5}}, Typeset`size$$ = {
+    576., {182., 186.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`start$283905$$ = 
+    0, $CellContext`tradeto$283906$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`start$$ = 25., $CellContext`tradeto$$ = 
+        75.}, "ControllerVariables" :> {
+        Hold[$CellContext`start$$, $CellContext`start$283905$$, 0], 
+        Hold[$CellContext`tradeto$$, $CellContext`tradeto$283906$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Plot[{100/(
+         1 + $CellContext`odds[$CellContext`start$$, $CellContext`target]), 
+         100/(1 + $CellContext`odds[
+          100 - $CellContext`start$$, 
+           100 - $CellContext`target])}, {$CellContext`target, 0.5, 99.5}, 
+        PlotStyle -> {Green, Red}, ImageSize -> Large, 
+        AxesLabel -> {"%", "Win %"}, 
+        GridLines -> {{$CellContext`start$$, $CellContext`tradeto$$}, {
+           
+           If[$CellContext`start$$ < $CellContext`tradeto$$, 100/(
+            1 + $CellContext`odds[$CellContext`start$$, \
+$CellContext`tradeto$$]), 100/(
+            1 + $CellContext`odds[
+             100 - $CellContext`start$$, 100 - $CellContext`tradeto$$])]}}, 
+        Ticks -> {{0, 10, 25, 50, 75, 90, 100, {$CellContext`start$$, "S"}}, 
+          Automatic}, PlotRange -> {{0, 100}, {0, 100}}], 
+      "Specifications" :> {{{$CellContext`start$$, 25.}, 0.5, 99.5, 
+         Appearance -> "Labeled"}, {{$CellContext`tradeto$$, 75.}, 0.5, 99.5, 
+         Appearance -> "Labeled"}}, "Options" :> {}, "DefaultOptions" :> {}],
+     ImageSizeCache->{627., {241., 248.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{{3.615987133819416*^9, 3.6159871604739404`*^9}, 
+   3.6159871919927435`*^9, 3.615987227898797*^9, 3.6159875480781097`*^9, 
+   3.6159875915695972`*^9, {3.6159876405503993`*^9, 3.615987653028113*^9}, {
+   3.615987694188467*^9, 3.615987716805761*^9}, 3.615987748642582*^9, 
+   3.615987810141099*^9, {3.615987895734995*^9, 3.615987903981467*^9}, 
+   3.6159879595066423`*^9, 3.615994691245676*^9}]
+}, Open  ]]
+},
+WindowSize->{899, 1096},
+WindowMargins->{{Automatic, 278}, {Automatic, 100}},
+FrontEndVersion->"10.0 for Microsoft Windows (64-bit) (July 1, 2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 285, 8, 31, "Input"],
+Cell[846, 30, 330, 11, 31, "Input"],
+Cell[CellGroupData[{
+Cell[1201, 45, 2509, 47, 371, "Input",
+ CellID->124],
+Cell[3713, 94, 4765, 90, 486, "Output"]
+}, Open  ]],
+Cell[8493, 187, 232, 6, 31, "Input",
+ CellID->524],
+Cell[CellGroupData[{
+Cell[8750, 197, 1580, 32, 337, "Input",
+ CellID->525],
+Cell[10333, 231, 5157, 108, 486, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[15527, 344, 1062, 23, 269, "Input",
+ CellID->591],
+Cell[16592, 369, 5031, 108, 498, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[21660, 482, 1691, 37, 524, "Input",
+ CellID->594],
+Cell[23354, 521, 6173, 131, 878, "Output"]
+}, Open  ]],
+Cell[29542, 655, 372, 11, 116, "Input",
+ CellID->611],
+Cell[CellGroupData[{
+Cell[29939, 670, 800, 18, 201, "Input",
+ CellID->612],
+Cell[30742, 690, 2536, 47, 470, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[33315, 742, 3051, 84, 292, "Input"],
+Cell[36369, 828, 4895, 106, 498, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[41301, 939, 3577, 93, 312, "Input"],
+Cell[44881, 1034, 3064, 57, 506, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
