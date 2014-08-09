@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[    119578,       2722]
-NotebookOptionsPosition[    117241,       2641]
-NotebookOutlinePosition[    117584,       2656]
-CellTagsIndexPosition[    117541,       2653]
+NotebookDataLength[    130869,       2964]
+NotebookOptionsPosition[    128527,       2883]
+NotebookOutlinePosition[    128871,       2898]
+CellTagsIndexPosition[    128828,       2895]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -282,25 +282,33 @@ Cell[BoxData[
     "]"}], ":=", "\[IndentingNewLine]", 
   RowBox[{"Map", "[", 
    RowBox[{
-    RowBox[{"Apply", "[", 
-     RowBox[{"Function", "[", 
-      RowBox[{
-       RowBox[{"{", 
-        RowBox[{"n", ",", "u", ",", "l", ",", "yes", ",", "no", ",", "res"}], 
-        "}"}], ",", "\[IndentingNewLine]", 
-       RowBox[{"{", 
-        RowBox[{"n", ",", "u", ",", "l", ",", 
-         RowBox[{"Style", "[", 
-          RowBox[{
-           RowBox[{"tinyRound", "[", "yes", "]"}], ",", 
-           RowBox[{"Darker", "[", "Green", "]"}]}], "]"}], ",", 
-         RowBox[{"Style", "[", 
-          RowBox[{
-           RowBox[{"tinyRound", "[", "no", "]"}], ",", 
-           RowBox[{"Darker", "[", "Red", "]"}]}], "]"}], ",", 
-         RowBox[{"Round", "[", 
-          RowBox[{"res", ",", "0.1"}], "]"}]}], "}"}]}], "]"}], "]"}], ",", 
-    "\[IndentingNewLine]", 
+    RowBox[{"Function", "[", 
+     RowBox[{"v", ",", "\[IndentingNewLine]", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"v", "[", 
+         RowBox[{"[", "1", "]"}], "]"}], ",", 
+        RowBox[{"v", "[", 
+         RowBox[{"[", "2", "]"}], "]"}], ",", 
+        RowBox[{"v", "[", 
+         RowBox[{"[", "3", "]"}], "]"}], ",", 
+        RowBox[{"Style", "[", 
+         RowBox[{
+          RowBox[{"tinyRound", "[", 
+           RowBox[{"v", "[", 
+            RowBox[{"[", "4", "]"}], "]"}], "]"}], ",", 
+          RowBox[{"Darker", "[", "Green", "]"}]}], "]"}], ",", 
+        RowBox[{"Style", "[", 
+         RowBox[{
+          RowBox[{"tinyRound", "[", 
+           RowBox[{"v", "[", 
+            RowBox[{"[", "5", "]"}], "]"}], "]"}], ",", 
+          RowBox[{"Darker", "[", "Red", "]"}]}], "]"}], ",", 
+        RowBox[{"Round", "[", 
+         RowBox[{
+          RowBox[{"v", "[", 
+           RowBox[{"[", "6", "]"}], "]"}], ",", "0.1"}], "]"}]}], "}"}]}], 
+     "]"}], ",", "\[IndentingNewLine]", 
     RowBox[{"With", "[", 
      RowBox[{
       RowBox[{"{", 
@@ -483,7 +491,9 @@ Cell[BoxData[
    3.616374735556224*^9, 3.616374756741435*^9}, {3.6163750606598186`*^9, 
    3.616375069483323*^9}, {3.6163751212462835`*^9, 3.6163751259735537`*^9}, {
    3.616375369755498*^9, 3.6163754136740093`*^9}, {3.6163754536402955`*^9, 
-   3.6163754658769956`*^9}, {3.616543317464557*^9, 3.616543356864811*^9}}],
+   3.6163754658769956`*^9}, {3.616543317464557*^9, 3.616543356864811*^9}, {
+   3.616593947997458*^9, 3.616593994243103*^9}, {3.616594037415572*^9, 
+   3.6165940462080755`*^9}}],
 
 Cell[TextData[StyleBox["Simple Mode Calculator", "Section"]], "Text",
  CellChangeTimes->{{3.616542906330042*^9, 3.616542909418218*^9}}],
@@ -546,14 +556,22 @@ Cell[BoxData[
          "\"\<Lower %\>\"", ",", "\"\<Resolves\\nTrue\>\"", ",", 
          "\"\<Resolves\\nFalse\>\"", ",", "\"\<Result%\>\""}], "}"}]}], "]"}],
       ",", "\[IndentingNewLine]", 
+     RowBox[{"ItemSize", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"Scaled", "[", "0.2", "]"}], ",", 
+         RowBox[{"Scaled", "[", ".07", "]"}]}], "}"}], "}"}]}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Frame", "\[Rule]", "True"}], ",", "\[IndentingNewLine]", 
      RowBox[{"Dividers", "\[Rule]", 
       RowBox[{"{", 
        RowBox[{
         RowBox[{"{", 
-         RowBox[{"False", ",", "1"}], "}"}], ",", 
+         RowBox[{"1", ",", "1"}], "}"}], ",", 
         RowBox[{"{", 
-         RowBox[{"False", ",", "1"}], "}"}]}], "}"}]}]}], 
-    "\[IndentingNewLine]", "]"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"1", ",", "1"}], "}"}]}], "}"}]}]}], "\[IndentingNewLine]", 
+    "]"}], ",", "\[IndentingNewLine]", 
    RowBox[{"{", 
     RowBox[{
      RowBox[{"{", 
@@ -578,27 +596,29 @@ Cell[BoxData[
    3.616373509703109*^9, 3.616373537498698*^9}, {3.616373611702943*^9, 
    3.6163736118379507`*^9}, {3.616374032983039*^9, 3.6163740518131156`*^9}, {
    3.616375227286349*^9, 3.616375347814243*^9}, {3.6165430261848965`*^9, 
-   3.6165430273249617`*^9}, {3.616543068638325*^9, 3.6165430907625904`*^9}}],
+   3.6165430273249617`*^9}, {3.616543068638325*^9, 3.6165430907625904`*^9}, {
+   3.616592735621114*^9, 3.6165928075372276`*^9}, {3.6165928633614206`*^9, 
+   3.616592889940941*^9}}],
 
 Cell[BoxData[
  TagBox[
   StyleBox[
    DynamicModuleBox[{$CellContext`available$$ = 5000, $CellContext`start$$ = 
-    89., Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    75.5, Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
     Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
     1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
        Hold[$CellContext`start$$], 50}, 0.5, 99.5, 0.5}, {{
        Hold[$CellContext`available$$], 5000}, 100, 5000, 10}}, 
-    Typeset`size$$ = {502., {82.5, 89.5}}, Typeset`update$$ = 0, 
+    Typeset`size$$ = {630., {87., 94.}}, Typeset`update$$ = 0, 
     Typeset`initDone$$, Typeset`skipInitDone$$ = 
-    False, $CellContext`start$719187$$ = 0, $CellContext`available$719188$$ = 
+    False, $CellContext`start$745280$$ = 0, $CellContext`available$745281$$ = 
     0}, 
     DynamicBox[Manipulate`ManipulateBoxes[
      1, StandardForm, 
       "Variables" :> {$CellContext`available$$ = 5000, $CellContext`start$$ = 
         50}, "ControllerVariables" :> {
-        Hold[$CellContext`start$$, $CellContext`start$719187$$, 0], 
-        Hold[$CellContext`available$$, $CellContext`available$719188$$, 0]}, 
+        Hold[$CellContext`start$$, $CellContext`start$745280$$, 0], 
+        Hold[$CellContext`available$$, $CellContext`available$745281$$, 0]}, 
       "OtherVariables" :> {
        Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
         Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
@@ -628,12 +648,14 @@ Cell[BoxData[
            "Almost surely not", 10, 
             0, $CellContext`start$$, $CellContext`available$$ 0.01]}, 1], {
          "Opinion", "Upper %", "Lower %", "Resolves\nTrue", "Resolves\nFalse",
-           "Result%"}], Dividers -> {{False, 1}, {False, 1}}], 
+           "Result%"}], ItemSize -> {{
+           Scaled[0.2], 
+           Scaled[0.07]}}, Frame -> True, Dividers -> {{1, 1}, {1, 1}}], 
       "Specifications" :> {{{$CellContext`start$$, 50}, 0.5, 99.5, 0.5, 
          Appearance -> "Labeled"}, {{$CellContext`available$$, 5000}, 100, 
          5000, 10, Appearance -> "Labeled"}}, "Options" :> {}, 
       "DefaultOptions" :> {}],
-     ImageSizeCache->{553., {144., 151.}},
+     ImageSizeCache->{681., {148., 155.}},
      SingleEvaluation->True],
     Deinitialization:>None,
     DynamicModuleValues:>{},
@@ -682,18 +704,20 @@ $CellContext`mean]}]]]]], $CellContext`simpleTrade[
           Blank[]], 
          Pattern[$CellContext`pointLimit, 
           Blank[]]] := Map[
-         Apply[
-          
-          Function[{$CellContext`n, $CellContext`u, $CellContext`l, \
-$CellContext`yes, $CellContext`no, $CellContext`res}, {$CellContext`n, \
-$CellContext`u, $CellContext`l, 
-            Style[
-             $CellContext`tinyRound[$CellContext`yes], 
-             Darker[Green]], 
-            Style[
-             $CellContext`tinyRound[$CellContext`no], 
-             Darker[Red]], 
-            Round[$CellContext`res, 0.1]}]], 
+         Function[$CellContext`v, {
+           Part[$CellContext`v, 1], 
+           Part[$CellContext`v, 2], 
+           Part[$CellContext`v, 3], 
+           Style[
+            $CellContext`tinyRound[
+             Part[$CellContext`v, 4]], 
+            Darker[Green]], 
+           Style[
+            $CellContext`tinyRound[
+             Part[$CellContext`v, 5]], 
+            Darker[Red]], 
+           Round[
+            Part[$CellContext`v, 6], 0.1]}], 
          With[{$CellContext`target = ($CellContext`upper + \
 $CellContext`lower)/
             2, $CellContext`mean = (($CellContext`upper + $CellContext`lower)/
@@ -707,7 +731,7 @@ $CellContext`pointLimit]},
            Inequality[$CellContext`lower, LessEqual, $CellContext`start, 
             Less, $CellContext`upper], {
             
-            If[$CellContext`upperLimit < ($CellContext`upperLimit + \
+            If[$CellContext`upperLimit < ($CellContext`upper + \
 $CellContext`start)/2, {
               
               StringJoin[$CellContext`name, 
@@ -719,17 +743,16 @@ $CellContext`upperLimit], $CellContext`upperLimit}, {
               
               StringJoin[$CellContext`name, 
                " (Higher)"], $CellContext`upper, $CellContext`lower, 
-              $CellContext`yesCost[$CellContext`start, \
-($CellContext`upperLimit + $CellContext`start)/2], 
-              $CellContext`noCost[$CellContext`start, \
-($CellContext`upperLimit + $CellContext`start)/
-               2], ($CellContext`upperLimit + $CellContext`start)/2}], {
+              $CellContext`yesCost[$CellContext`start, ($CellContext`upper + \
+$CellContext`start)/2], 
+              $CellContext`noCost[$CellContext`start, ($CellContext`upper + \
+$CellContext`start)/2], ($CellContext`upper + $CellContext`start)/2}], {
              
              StringJoin[$CellContext`name, 
               " (Same)"], $CellContext`upper, $CellContext`lower, 0, 
              0, $CellContext`start}, 
             
-            If[($CellContext`lowerLimit + $CellContext`start)/
+            If[($CellContext`lower + $CellContext`start)/
               2 < $CellContext`lowerLimit, {
               
               StringJoin[$CellContext`name, 
@@ -741,11 +764,10 @@ $CellContext`lowerLimit], $CellContext`lowerLimit}, {
               
               StringJoin[$CellContext`name, 
                " (Lower)"], $CellContext`upper, $CellContext`lower, 
-              $CellContext`yesCost[$CellContext`start, \
-($CellContext`lowerLimit + $CellContext`start)/2], 
-              $CellContext`noCost[$CellContext`start, \
-($CellContext`lowerLimit + $CellContext`start)/
-               2], ($CellContext`lowerLimit + $CellContext`start)/
+              $CellContext`yesCost[$CellContext`start, ($CellContext`lower + \
+$CellContext`start)/2], 
+              $CellContext`noCost[$CellContext`start, ($CellContext`lower + \
+$CellContext`start)/2], ($CellContext`lower + $CellContext`start)/
               2}]}, $CellContext`upper <= $CellContext`start, {
             
             If[$CellContext`mean < $CellContext`lowerLimit, \
@@ -821,7 +843,9 @@ $CellContext`mean}]}]]], $CellContext`pushDownBy[
    3.616374759655602*^9}, {3.616375239346039*^9, 3.6163752766671734`*^9}, 
    3.6163753075309386`*^9, {3.6163753434939957`*^9, 3.6163753492803264`*^9}, 
    3.6163766819405503`*^9, 3.6165430277989893`*^9, {3.6165430707624464`*^9, 
-   3.6165430930727224`*^9}}]
+   3.6165430930727224`*^9}, {3.6165927666538887`*^9, 
+   3.6165928082612686`*^9}, {3.61659286667661*^9, 3.6165928909609985`*^9}, 
+   3.616594002566579*^9, 3.616594051393372*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -2106,32 +2130,163 @@ Cell[BoxData[
               RowBox[{"1", "\[LessEqual]", "tradeto", "<", "99"}], ")"}]}], 
             "\[IndentingNewLine]", "}"}], ",", "tradeto"}], "]"}], "]"}]}]}], 
       "}"}], ",", "\[IndentingNewLine]", 
-     RowBox[{"Grid", "[", 
-      RowBox[{"{", 
+     RowBox[{"Column", "[", 
+      RowBox[{"{", "\[IndentingNewLine]", 
        RowBox[{
-        RowBox[{"{", 
-         RowBox[{"\"\<Trade to:\>\"", ",", 
-          RowBox[{"Round", "[", "tradeto", "]"}]}], "}"}], ",", 
-        "\[IndentingNewLine]", 
-        RowBox[{"{", 
-         RowBox[{"\"\<Potential winnings:\>\"", ",", 
-          RowBox[{"N", "[", 
-           RowBox[{"Max", "[", 
+        RowBox[{"Grid", "[", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"\"\<Trade to:\>\"", ",", 
+             RowBox[{"StringJoin", "[", 
+              RowBox[{
+               RowBox[{"ToString", "[", 
+                RowBox[{"Round", "[", "tradeto", "]"}], "]"}], ",", 
+               "\"\<%\>\""}], "]"}]}], "}"}], ",", 
+           RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
+           RowBox[{"{", 
             RowBox[{
-             RowBox[{"yesCost", "[", 
-              RowBox[{"start", ",", 
-               RowBox[{"Round", "[", "tradeto", "]"}]}], "]"}], ",", 
-             RowBox[{"noCost", "[", 
-              RowBox[{"start", ",", 
-               RowBox[{"Round", "[", "tradeto", "]"}]}], "]"}]}], "]"}], 
-           "]"}]}], "}"}], ",", "\[IndentingNewLine]", 
-        RowBox[{"{", 
-         RowBox[{"\"\<Cost:\>\"", ",", 
-          RowBox[{"N", "[", 
-           RowBox[{"cost", "[", 
-            RowBox[{"start", ",", 
-             RowBox[{"Round", "[", "tradeto", "]"}]}], "]"}], "]"}]}], 
-         "}"}]}], "}"}], "]"}]}], "]"}], ",", "\n", "  ", 
+            "\"\<New Assets\>\"", ",", "\"\<\>\"", ",", 
+             "\"\<Final Assets\>\""}], "}"}], ",", "\[IndentingNewLine]", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"tinyRound", "[", 
+              RowBox[{"yesCost", "[", 
+               RowBox[{"start", ",", 
+                RowBox[{"Round", "[", "tradeto", "]"}]}], "]"}], "]"}], ",", 
+             "\[IndentingNewLine]", "\"\<Yes\>\"", ",", 
+             RowBox[{"tinyRound", "[", 
+              RowBox[{
+               RowBox[{"yesCost", "[", 
+                RowBox[{"start", ",", 
+                 RowBox[{"Round", "[", "tradeto", "]"}]}], "]"}], "+", 
+               "yesAssets"}], "]"}]}], "}"}], ",", "\[IndentingNewLine]", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"tinyRound", "[", 
+              RowBox[{"noCost", "[", 
+               RowBox[{"start", ",", 
+                RowBox[{"Round", "[", "tradeto", "]"}]}], "]"}], "]"}], ",", 
+             "\[IndentingNewLine]", "\"\<No\>\"", ",", 
+             RowBox[{"tinyRound", "[", 
+              RowBox[{
+               RowBox[{"noCost", "[", 
+                RowBox[{"start", ",", 
+                 RowBox[{"Round", "[", "tradeto", "]"}]}], "]"}], "+", 
+               "noAssets"}], "]"}]}], "}"}]}], "}"}], "]"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Plot", "[", 
+         RowBox[{
+          RowBox[{"expectedOutcome", "[", 
+           RowBox[{
+           "start", ",", "belief", ",", "target", ",", "noAssets", ",", 
+            "yesAssets"}], "]"}], ",", "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{"target", ",", "0.5", ",", "99.5"}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"ImageSize", "\[Rule]", "Large"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"ColorFunctionScaling", "\[Rule]", "False"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"AxesLabel", "\[Rule]", 
+           RowBox[{"{", 
+            RowBox[{"\"\<%\>\"", ",", "\"\<E[Earnings after trade]\>\""}], 
+            "}"}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{"PlotRange", "\[Rule]", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"0", ",", "100"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"-", "100"}], ",", 
+               RowBox[{"50", "+", 
+                RowBox[{"expectedOutcome", "[", 
+                 RowBox[{
+                 "start", ",", "belief", ",", "belief", ",", "noAssets", ",", 
+                  "yesAssets"}], "]"}]}]}], "}"}]}], "}"}]}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"ColorFunction", "\[Rule]", 
+           RowBox[{"Function", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"x", ",", "y"}], "}"}], ",", 
+             RowBox[{"If", "[", 
+              RowBox[{
+               RowBox[{"y", ">", "0"}], ",", "Blue", ",", "Orange"}], "]"}]}],
+             "]"}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{"GridLines", "\[Rule]", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"start", ",", "belief", ",", "tradeto"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"expectedOutcome", "[", 
+               RowBox[{
+               "start", ",", "belief", ",", "belief", ",", "noAssets", ",", 
+                "yesAssets"}], "]"}], "}"}]}], "}"}]}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"Ticks", "\[Rule]", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{
+              "0", ",", "10", ",", "25", ",", "50", ",", "75", ",", "90", ",",
+                "100", ",", 
+               RowBox[{"{", 
+                RowBox[{"start", ",", "\"\<S\>\""}], "}"}], ",", 
+               RowBox[{"{", 
+                RowBox[{"tradeto", ",", "\"\<T\>\""}], "}"}], ",", 
+               RowBox[{"{", 
+                RowBox[{"belief", ",", "\"\<B\>\""}], "}"}]}], "}"}], ",", 
+             "Automatic"}], "}"}]}], ",", 
+          RowBox[{"Epilog", "\[Rule]", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"Text", "[", 
+              RowBox[{
+               RowBox[{"Round", "[", 
+                RowBox[{"expectedOutcome", "[", 
+                 RowBox[{
+                 "start", ",", "belief", ",", "belief", ",", "noAssets", ",", 
+                  "yesAssets"}], "]"}], "]"}], ",", "\[IndentingNewLine]", 
+               "                         ", 
+               RowBox[{"{", 
+                RowBox[{"belief", ",", 
+                 RowBox[{"expectedOutcome", "[", 
+                  RowBox[{
+                  "start", ",", "belief", ",", "belief", ",", "noAssets", ",",
+                    "yesAssets"}], "]"}]}], "}"}], ",", "\[IndentingNewLine]",
+                "                         ", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"If", "[", 
+                  RowBox[{
+                   RowBox[{"belief", "<", "tradeto"}], ",", "Right", ",", 
+                   "Left"}], "]"}], ",", "Bottom"}], "}"}]}], "]"}], ",", 
+             "\[IndentingNewLine]", "                ", 
+             RowBox[{"Text", "[", 
+              RowBox[{
+               RowBox[{"Round", "[", 
+                RowBox[{"expectedOutcome", "[", 
+                 RowBox[{
+                 "start", ",", "belief", ",", "tradeto", ",", "noAssets", ",",
+                   "yesAssets"}], "]"}], "]"}], ",", "\[IndentingNewLine]", 
+               "                         ", 
+               RowBox[{"{", 
+                RowBox[{"tradeto", ",", 
+                 RowBox[{"expectedOutcome", "[", 
+                  RowBox[{
+                  "start", ",", "belief", ",", "tradeto", ",", "noAssets", 
+                   ",", "yesAssets"}], "]"}]}], "}"}], ",", 
+               "\[IndentingNewLine]", "                         ", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"If", "[", 
+                  RowBox[{
+                   RowBox[{"belief", "<", "tradeto"}], ",", "Left", ",", 
+                   "Right"}], "]"}], ",", "Bottom"}], "}"}]}], "]"}]}], 
+            "}"}]}]}], "]"}]}], "}"}], "]"}]}], "]"}], ",", "\n", "  ", 
    RowBox[{"{", 
     RowBox[{
      RowBox[{"{", 
@@ -2184,14 +2339,22 @@ Cell[BoxData[
    3.6165407450294223`*^9, 3.616540911184926*^9}, {3.6165410330398955`*^9, 
    3.6165410598094263`*^9}, {3.6165411004387503`*^9, 3.616541151765686*^9}, {
    3.616541873846987*^9, 3.6165419233368177`*^9}, {3.6165423994810514`*^9, 
-   3.616542401443164*^9}, {3.616542676314885*^9, 3.616542758324576*^9}}],
+   3.616542401443164*^9}, {3.616542676314885*^9, 3.616542758324576*^9}, {
+   3.6165947425729055`*^9, 3.6165948006082244`*^9}, {3.6165948746654606`*^9, 
+   3.6165949168338723`*^9}, {3.616594962924508*^9, 3.6165950580169477`*^9}, {
+   3.6165951034315453`*^9, 3.6165952145819025`*^9}, {3.6165952531121063`*^9, 
+   3.616595262493643*^9}, {3.6165953196239104`*^9, 3.616595438361702*^9}, {
+   3.616595520527402*^9, 3.6165955227145267`*^9}, {3.616595577044634*^9, 
+   3.616595590691415*^9}, {3.61659568012453*^9, 3.6165957148735175`*^9}, {
+   3.616596003878048*^9, 3.616596105585865*^9}, {3.6165961389637737`*^9, 
+   3.6165961647182474`*^9}, {3.6165962026934195`*^9, 3.616596214513095*^9}}],
 
 Cell[BoxData[
  TagBox[
   StyleBox[
-   DynamicModuleBox[{$CellContext`bankroll$$ = 500, $CellContext`belief$$ = 
-    60, $CellContext`noAssets$$ = 0, $CellContext`start$$ = 
-    40, $CellContext`yesAssets$$ = 0, Typeset`show$$ = True, 
+   DynamicModuleBox[{$CellContext`bankroll$$ = 70, $CellContext`belief$$ = 
+    60, $CellContext`noAssets$$ = 130, $CellContext`start$$ = 
+    40, $CellContext`yesAssets$$ = -155, Typeset`show$$ = True, 
     Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
     Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
     "\"untitled\"", Typeset`specs$$ = {{{
@@ -2201,21 +2364,21 @@ Cell[BoxData[
       Hold["Assets you already have"], Manipulate`Dump`ThisIsNotAControl}, {{
        Hold[$CellContext`yesAssets$$], 0}, -500, 500, 5}, {{
        Hold[$CellContext`noAssets$$], 0}, -500, 500, 5}}, Typeset`size$$ = {
-    226., {16.5, 23.5}}, Typeset`update$$ = 0, Typeset`initDone$$, 
-    Typeset`skipInitDone$$ = False, $CellContext`start$720564$$ = 
-    0, $CellContext`belief$720565$$ = 0, $CellContext`bankroll$720566$$ = 
-    0, $CellContext`yesAssets$720567$$ = 0, $CellContext`noAssets$720568$$ = 
+    576., {204., 211.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`start$802335$$ = 
+    0, $CellContext`belief$802336$$ = 0, $CellContext`bankroll$802337$$ = 
+    0, $CellContext`yesAssets$802338$$ = 0, $CellContext`noAssets$802339$$ = 
     0}, 
     DynamicBox[Manipulate`ManipulateBoxes[
      1, StandardForm, 
       "Variables" :> {$CellContext`bankroll$$ = 500, $CellContext`belief$$ = 
         60, $CellContext`noAssets$$ = 0, $CellContext`start$$ = 
         40, $CellContext`yesAssets$$ = 0}, "ControllerVariables" :> {
-        Hold[$CellContext`start$$, $CellContext`start$720564$$, 0], 
-        Hold[$CellContext`belief$$, $CellContext`belief$720565$$, 0], 
-        Hold[$CellContext`bankroll$$, $CellContext`bankroll$720566$$, 0], 
-        Hold[$CellContext`yesAssets$$, $CellContext`yesAssets$720567$$, 0], 
-        Hold[$CellContext`noAssets$$, $CellContext`noAssets$720568$$, 0]}, 
+        Hold[$CellContext`start$$, $CellContext`start$802335$$, 0], 
+        Hold[$CellContext`belief$$, $CellContext`belief$802336$$, 0], 
+        Hold[$CellContext`bankroll$$, $CellContext`bankroll$802337$$, 0], 
+        Hold[$CellContext`yesAssets$$, $CellContext`yesAssets$802338$$, 0], 
+        Hold[$CellContext`noAssets$$, $CellContext`noAssets$802339$$, 0]}, 
       "OtherVariables" :> {
        Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
         Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
@@ -2240,17 +2403,64 @@ $CellContext`tradeto] + $CellContext`bankroll$$ + $CellContext`noAssets$$], \
               Inequality[
               1, LessEqual, $CellContext`tradeto, Less, 
                99]}, $CellContext`tradeto]]]}, 
-        Grid[{{"Trade to:", 
-           Round[$CellContext`tradeto$]}, {"Potential winnings:", 
-           N[
-            Max[
-             $CellContext`yesCost[$CellContext`start$$, 
-              Round[$CellContext`tradeto$]], 
-             $CellContext`noCost[$CellContext`start$$, 
-              Round[$CellContext`tradeto$]]]]}, {"Cost:", 
-           N[
-            $CellContext`cost[$CellContext`start$$, 
-             Round[$CellContext`tradeto$]]]}}]], 
+        Column[{
+          Grid[{{"Trade to:", 
+             StringJoin[
+              ToString[
+               Round[$CellContext`tradeto$]], "%"]}, {}, {
+            "New Assets", "", "Final Assets"}, {
+             $CellContext`tinyRound[
+              $CellContext`yesCost[$CellContext`start$$, 
+               Round[$CellContext`tradeto$]]], "Yes", 
+             $CellContext`tinyRound[$CellContext`yesCost[$CellContext`start$$, 
+                Round[$CellContext`tradeto$]] + $CellContext`yesAssets$$]}, {
+             $CellContext`tinyRound[
+              $CellContext`noCost[$CellContext`start$$, 
+               Round[$CellContext`tradeto$]]], "No", 
+             $CellContext`tinyRound[$CellContext`noCost[$CellContext`start$$, 
+                Round[$CellContext`tradeto$]] + $CellContext`noAssets$$]}}], 
+          Plot[
+           $CellContext`expectedOutcome[$CellContext`start$$, \
+$CellContext`belief$$, $CellContext`target, $CellContext`noAssets$$, \
+$CellContext`yesAssets$$], {$CellContext`target, 0.5, 99.5}, ImageSize -> 
+           Large, ColorFunctionScaling -> False, 
+           AxesLabel -> {"%", "E[Earnings after trade]"}, 
+           PlotRange -> {{0, 
+             100}, {-100, 
+              50 + $CellContext`expectedOutcome[$CellContext`start$$, \
+$CellContext`belief$$, $CellContext`belief$$, $CellContext`noAssets$$, \
+$CellContext`yesAssets$$]}}, ColorFunction -> 
+           Function[{$CellContext`x, $CellContext`y}, 
+             If[$CellContext`y > 0, Blue, Orange]], 
+           GridLines -> {{$CellContext`start$$, $CellContext`belief$$, \
+$CellContext`tradeto$}, {
+              $CellContext`expectedOutcome[$CellContext`start$$, \
+$CellContext`belief$$, $CellContext`belief$$, $CellContext`noAssets$$, \
+$CellContext`yesAssets$$]}}, 
+           Ticks -> {{
+             0, 10, 25, 50, 75, 90, 
+              100, {$CellContext`start$$, "S"}, {$CellContext`tradeto$, 
+               "T"}, {$CellContext`belief$$, "B"}}, Automatic}, Epilog -> {
+             Text[
+              Round[
+               $CellContext`expectedOutcome[$CellContext`start$$, \
+$CellContext`belief$$, $CellContext`belief$$, $CellContext`noAssets$$, \
+$CellContext`yesAssets$$]], {$CellContext`belief$$, 
+               $CellContext`expectedOutcome[$CellContext`start$$, \
+$CellContext`belief$$, $CellContext`belief$$, $CellContext`noAssets$$, \
+$CellContext`yesAssets$$]}, {
+               If[$CellContext`belief$$ < $CellContext`tradeto$, Right, Left],
+                Bottom}], 
+             Text[
+              Round[
+               $CellContext`expectedOutcome[$CellContext`start$$, \
+$CellContext`belief$$, $CellContext`tradeto$, $CellContext`noAssets$$, \
+$CellContext`yesAssets$$]], {$CellContext`tradeto$, 
+               $CellContext`expectedOutcome[$CellContext`start$$, \
+$CellContext`belief$$, $CellContext`tradeto$, $CellContext`noAssets$$, \
+$CellContext`yesAssets$$]}, {
+               If[$CellContext`belief$$ < $CellContext`tradeto$, Left, Right],
+                Bottom}]}]}]], 
       "Specifications" :> {{{$CellContext`start$$, 40}, 0.5, 99.5, 0.5, 
          Appearance -> "Labeled"}, {{$CellContext`belief$$, 60}, 0.5, 99.5, 
          0.5, Appearance -> "Labeled"}, {{$CellContext`bankroll$$, 500}, 10, 
@@ -2259,7 +2469,7 @@ $CellContext`tradeto] + $CellContext`bankroll$$ + $CellContext`noAssets$$], \
          5, Appearance -> "Labeled"}, {{$CellContext`noAssets$$, 0}, -500, 
          500, 5, Appearance -> "Labeled"}}, "Options" :> {}, 
       "DefaultOptions" :> {}],
-     ImageSizeCache->{346., {125., 132.}},
+     ImageSizeCache->{627., {312., 319.}},
      SingleEvaluation->True],
     Deinitialization:>None,
     DynamicModuleValues:>{},
@@ -2274,14 +2484,38 @@ $CellContext`tradeto] + $CellContext`bankroll$$ + $CellContext`noAssets$$], \
          Pattern[$CellContext`t, 
           Blank[]]] := 
        100 Log[2, (100 - $CellContext`t)/(
-          100 - $CellContext`i)], $CellContext`cost[
-         Pattern[$CellContext`start, 
+          100 - $CellContext`i)], $CellContext`tinyRound[
+         Pattern[$CellContext`v, 
+          Blank[]]] := Round[$CellContext`v, 
+         If[
+          And[Abs[$CellContext`v] < 1, $CellContext`v != 0], 0.1, 
+          1]], $CellContext`expectedOutcome[
+         Pattern[$CellContext`i, 
           Blank[]], 
-         Pattern[$CellContext`target, 
-          Blank[]]] := Min[
-         $CellContext`yesCost[$CellContext`start, $CellContext`target], 
-         $CellContext`noCost[$CellContext`start, $CellContext`target]]}; 
-     Typeset`initDone$$ = True),
+         Pattern[$CellContext`b, 
+          Blank[]], 
+         Pattern[$CellContext`t, 
+          Blank[]]] := ($CellContext`b/
+          100) $CellContext`yesCost[$CellContext`i, $CellContext`t] + (
+          1 - $CellContext`b/
+          100) $CellContext`noCost[$CellContext`i, $CellContext`t], \
+$CellContext`expectedOutcome[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`b, 
+          Blank[]], 
+         Pattern[$CellContext`t, 
+          Blank[]], 
+         Optional[
+          Pattern[$CellContext`neg, 
+           Blank[]], 0], 
+         Optional[
+          Pattern[$CellContext`pos, 
+           Blank[]], 0]] := ($CellContext`b/
+          100) ($CellContext`pos + $CellContext`yesCost[$CellContext`i, \
+$CellContext`t]) + (1 - $CellContext`b/
+          100) ($CellContext`neg + $CellContext`noCost[$CellContext`i, \
+$CellContext`t])}; Typeset`initDone$$ = True),
     SynchronousInitialization->True,
     UnsavedVariables:>{Typeset`initDone$$},
     UntrackedVariables:>{Typeset`size$$}], "Manipulate",
@@ -2302,7 +2536,15 @@ $CellContext`tradeto] + $CellContext`bankroll$$ + $CellContext`noAssets$$], \
    3.616540864104233*^9, 3.6165408736957817`*^9}, 3.6165409140280886`*^9, {
    3.616541034107957*^9, 3.6165410607284794`*^9}, {3.6165411480014706`*^9, 
    3.61654115252873*^9}, {3.6165419041617208`*^9, 3.6165419248049016`*^9}, {
-   3.6165426998932343`*^9, 3.616542745576847*^9}, 3.616543700250451*^9}]
+   3.6165426998932343`*^9, 3.616542745576847*^9}, 3.616543700250451*^9, 
+   3.616594823943559*^9, 3.616594921039113*^9, 3.616595004453884*^9, {
+   3.6165951728145137`*^9, 3.616595215482954*^9}, 3.61659526384172*^9, {
+   3.6165953242241735`*^9, 3.616595344981361*^9}, {3.61659541962463*^9, 
+   3.6165954388467293`*^9}, 3.616595523286559*^9, {3.616595581583894*^9, 
+   3.6165955914074554`*^9}, {3.6165956877929688`*^9, 3.6165957156125593`*^9}, 
+   3.6165960094393654`*^9, {3.616596071809933*^9, 3.616596106847937*^9}, {
+   3.616596144368083*^9, 3.616596165135271*^9}, {3.6165962064416337`*^9, 
+   3.616596215586157*^9}}]
 }, Open  ]],
 
 Cell[TextData[StyleBox["LMSR calculations taking into account time value of \
@@ -2639,8 +2881,8 @@ $CellContext`noCost[
    3.616377986742181*^9, 3.6163780032991276`*^9}}]
 }, Open  ]]
 },
-WindowSize->{1610, 1067},
-WindowMargins->{{Automatic, 69}, {52, Automatic}},
+WindowSize->{1452, 1157},
+WindowMargins->{{Automatic, 327}, {72, Automatic}},
 FrontEndVersion->"10.0 for Microsoft Windows (64-bit) (July 1, 2014)",
 StyleDefinitions->"Default.nb"
 ]
@@ -2668,61 +2910,61 @@ Cell[10063, 221, 527, 15, 37, "Input"],
 Cell[10593, 238, 492, 11, 31, "Input"],
 Cell[11088, 251, 445, 13, 31, "Input"],
 Cell[11536, 266, 430, 8, 68, "Text"],
-Cell[11969, 276, 9432, 209, 492, "Input"],
-Cell[21404, 487, 135, 1, 46, "Text"],
+Cell[11969, 276, 9771, 219, 492, "Input"],
+Cell[21743, 497, 135, 1, 46, "Text"],
 Cell[CellGroupData[{
-Cell[21564, 492, 3944, 88, 332, "Input"],
-Cell[25511, 582, 11481, 241, 312, "Output"]
+Cell[21903, 502, 4358, 98, 372, "Input"],
+Cell[26264, 602, 11630, 245, 320, "Output"]
 }, Open  ]],
-Cell[37007, 826, 232, 6, 31, "Input",
+Cell[37909, 850, 232, 6, 31, "Input",
  CellID->524],
 Cell[CellGroupData[{
-Cell[37264, 836, 1873, 36, 354, "Input",
+Cell[38166, 860, 1873, 36, 354, "Input",
  CellID->525],
-Cell[39140, 874, 5637, 115, 492, "Output"]
+Cell[40042, 898, 5637, 115, 492, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[44814, 994, 1065, 22, 218, "Input",
+Cell[45716, 1018, 1065, 22, 218, "Input",
  CellID->591],
-Cell[45882, 1018, 5111, 107, 498, "Output"]
+Cell[46784, 1042, 5111, 107, 498, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[51030, 1130, 2460, 52, 660, "Input",
+Cell[51932, 1154, 2460, 52, 660, "Input",
  CellID->594],
-Cell[53493, 1184, 6550, 138, 584, "Output"]
+Cell[54395, 1208, 6550, 138, 584, "Output"]
 }, Open  ]],
-Cell[60058, 1325, 474, 12, 116, "Input",
+Cell[60960, 1349, 474, 12, 116, "Input",
  CellID->611],
 Cell[CellGroupData[{
-Cell[60557, 1341, 970, 20, 201, "Input",
+Cell[61459, 1365, 970, 20, 201, "Input",
  CellID->612],
-Cell[61530, 1363, 2916, 52, 470, "Output"]
+Cell[62432, 1387, 2916, 52, 470, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[64483, 1420, 4923, 123, 412, "Input"],
-Cell[69409, 1545, 6099, 130, 498, "Output"]
+Cell[65385, 1444, 4923, 123, 412, "Input"],
+Cell[70311, 1569, 6099, 130, 498, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[75545, 1680, 3666, 96, 312, "Input"],
-Cell[79214, 1778, 2787, 54, 506, "Output"]
+Cell[76447, 1704, 3666, 96, 312, "Input"],
+Cell[80116, 1802, 2787, 54, 506, "Output"]
 }, Open  ]],
-Cell[82016, 1835, 420, 11, 31, "Input"],
-Cell[82439, 1848, 484, 10, 87, "Text"],
+Cell[82918, 1859, 420, 11, 31, "Input"],
+Cell[83341, 1872, 484, 10, 87, "Text"],
 Cell[CellGroupData[{
-Cell[82948, 1862, 4222, 108, 332, "Input"],
-Cell[87173, 1972, 3802, 68, 532, "Output"]
+Cell[83850, 1886, 4222, 108, 332, "Input"],
+Cell[88075, 1996, 3802, 68, 532, "Output"]
 }, Open  ]],
-Cell[90990, 2043, 469, 8, 84, "Text"],
+Cell[91892, 2067, 469, 8, 84, "Text"],
 Cell[CellGroupData[{
-Cell[91484, 2055, 5707, 131, 392, "Input"],
-Cell[97194, 2188, 6185, 116, 274, "Output"]
+Cell[92386, 2079, 12116, 270, 772, "Input"],
+Cell[104505, 2351, 10160, 195, 648, "Output"]
 }, Open  ]],
-Cell[103394, 2307, 185, 2, 46, "Text"],
-Cell[103582, 2311, 869, 24, 72, "Input"],
-Cell[104454, 2337, 862, 24, 72, "Input"],
+Cell[114680, 2549, 185, 2, 46, "Text"],
+Cell[114868, 2553, 869, 24, 72, "Input"],
+Cell[115740, 2579, 862, 24, 72, "Input"],
 Cell[CellGroupData[{
-Cell[105341, 2365, 5462, 140, 512, "Input"],
-Cell[110806, 2507, 6419, 131, 546, "Output"]
+Cell[116627, 2607, 5462, 140, 512, "Input"],
+Cell[122092, 2749, 6419, 131, 546, "Output"]
 }, Open  ]]
 }
 ]

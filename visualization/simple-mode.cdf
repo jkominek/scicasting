@@ -23,10 +23,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[      1064,         20]
-NotebookDataLength[     11070,        261]
-NotebookOptionsPosition[     11639,        257]
-NotebookOutlinePosition[     12074,        276]
-CellTagsIndexPosition[     12031,        273]
+NotebookDataLength[     11070,        263]
+NotebookOptionsPosition[     11639,        259]
+NotebookOutlinePosition[     12074,        278]
+CellTagsIndexPosition[     12031,        275]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -35,21 +35,21 @@ Cell[BoxData[
  TagBox[
   StyleBox[
    DynamicModuleBox[{$CellContext`available$$ = 5000, $CellContext`start$$ = 
-    89., Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    75.5, Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
     Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
     1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
        Hold[$CellContext`start$$], 50}, 0.5, 99.5, 0.5}, {{
        Hold[$CellContext`available$$], 5000}, 100, 5000, 10}}, 
-    Typeset`size$$ = {502., {82.5, 89.5}}, Typeset`update$$ = 0, 
+    Typeset`size$$ = {631., {87., 94.}}, Typeset`update$$ = 0, 
     Typeset`initDone$$, Typeset`skipInitDone$$ = 
-    False, $CellContext`start$719187$$ = 0, $CellContext`available$719188$$ = 
+    False, $CellContext`start$745280$$ = 0, $CellContext`available$745281$$ = 
     0}, 
     DynamicBox[Manipulate`ManipulateBoxes[
      1, StandardForm, 
       "Variables" :> {$CellContext`available$$ = 5000, $CellContext`start$$ = 
         50}, "ControllerVariables" :> {
-        Hold[$CellContext`start$$, $CellContext`start$719187$$, 0], 
-        Hold[$CellContext`available$$, $CellContext`available$719188$$, 0]}, 
+        Hold[$CellContext`start$$, $CellContext`start$745280$$, 0], 
+        Hold[$CellContext`available$$, $CellContext`available$745281$$, 0]}, 
       "OtherVariables" :> {
        Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
         Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
@@ -79,12 +79,14 @@ Cell[BoxData[
            "Almost surely not", 10, 
             0, $CellContext`start$$, $CellContext`available$$ 0.01]}, 1], {
          "Opinion", "Upper %", "Lower %", "Resolves\nTrue", "Resolves\nFalse",
-           "Result%"}], Dividers -> {{False, 1}, {False, 1}}], 
+           "Result%"}], ItemSize -> {{
+           Scaled[0.2], 
+           Scaled[0.07]}}, Frame -> True, Dividers -> {{1, 1}, {1, 1}}], 
       "Specifications" :> {{{$CellContext`start$$, 50}, 0.5, 99.5, 0.5, 
          Appearance -> "Labeled"}, {{$CellContext`available$$, 5000}, 100, 
          5000, 10, Appearance -> "Labeled"}}, "Options" :> {}, 
       "DefaultOptions" :> {}],
-     ImageSizeCache->{553., {144., 151.}},
+     ImageSizeCache->{682., {148., 155.}},
      SingleEvaluation->True],
     Deinitialization:>None,
     DynamicModuleValues:>{},
@@ -133,18 +135,20 @@ $CellContext`mean]}]]]]], $CellContext`simpleTrade[
           Blank[]], 
          Pattern[$CellContext`pointLimit, 
           Blank[]]] := Map[
-         Apply[
-          
-          Function[{$CellContext`n, $CellContext`u, $CellContext`l, \
-$CellContext`yes, $CellContext`no, $CellContext`res}, {$CellContext`n, \
-$CellContext`u, $CellContext`l, 
-            Style[
-             $CellContext`tinyRound[$CellContext`yes], 
-             Darker[Green]], 
-            Style[
-             $CellContext`tinyRound[$CellContext`no], 
-             Darker[Red]], 
-            Round[$CellContext`res, 0.1]}]], 
+         Function[$CellContext`v, {
+           Part[$CellContext`v, 1], 
+           Part[$CellContext`v, 2], 
+           Part[$CellContext`v, 3], 
+           Style[
+            $CellContext`tinyRound[
+             Part[$CellContext`v, 4]], 
+            Darker[Green]], 
+           Style[
+            $CellContext`tinyRound[
+             Part[$CellContext`v, 5]], 
+            Darker[Red]], 
+           Round[
+            Part[$CellContext`v, 6], 0.1]}], 
          With[{$CellContext`target = ($CellContext`upper + \
 $CellContext`lower)/
             2, $CellContext`mean = (($CellContext`upper + $CellContext`lower)/
@@ -158,7 +162,7 @@ $CellContext`pointLimit]},
            Inequality[$CellContext`lower, LessEqual, $CellContext`start, 
             Less, $CellContext`upper], {
             
-            If[$CellContext`upperLimit < ($CellContext`upperLimit + \
+            If[$CellContext`upperLimit < ($CellContext`upper + \
 $CellContext`start)/2, {
               
               StringJoin[$CellContext`name, 
@@ -170,17 +174,16 @@ $CellContext`upperLimit], $CellContext`upperLimit}, {
               
               StringJoin[$CellContext`name, 
                " (Higher)"], $CellContext`upper, $CellContext`lower, 
-              $CellContext`yesCost[$CellContext`start, \
-($CellContext`upperLimit + $CellContext`start)/2], 
-              $CellContext`noCost[$CellContext`start, \
-($CellContext`upperLimit + $CellContext`start)/
-               2], ($CellContext`upperLimit + $CellContext`start)/2}], {
+              $CellContext`yesCost[$CellContext`start, ($CellContext`upper + \
+$CellContext`start)/2], 
+              $CellContext`noCost[$CellContext`start, ($CellContext`upper + \
+$CellContext`start)/2], ($CellContext`upper + $CellContext`start)/2}], {
              
              StringJoin[$CellContext`name, 
               " (Same)"], $CellContext`upper, $CellContext`lower, 0, 
              0, $CellContext`start}, 
             
-            If[($CellContext`lowerLimit + $CellContext`start)/
+            If[($CellContext`lower + $CellContext`start)/
               2 < $CellContext`lowerLimit, {
               
               StringJoin[$CellContext`name, 
@@ -192,11 +195,10 @@ $CellContext`lowerLimit], $CellContext`lowerLimit}, {
               
               StringJoin[$CellContext`name, 
                " (Lower)"], $CellContext`upper, $CellContext`lower, 
-              $CellContext`yesCost[$CellContext`start, \
-($CellContext`lowerLimit + $CellContext`start)/2], 
-              $CellContext`noCost[$CellContext`start, \
-($CellContext`lowerLimit + $CellContext`start)/
-               2], ($CellContext`lowerLimit + $CellContext`start)/
+              $CellContext`yesCost[$CellContext`start, ($CellContext`lower + \
+$CellContext`start)/2], 
+              $CellContext`noCost[$CellContext`start, ($CellContext`lower + \
+$CellContext`start)/2], ($CellContext`lower + $CellContext`start)/
               2}]}, $CellContext`upper <= $CellContext`start, {
             
             If[$CellContext`mean < $CellContext`lowerLimit, \
@@ -255,7 +257,7 @@ $CellContext`mean}]}]]], $CellContext`pushDownBy[
    StripOnInput->False],
   Manipulate`InterpretManipulate[1]]], "Output"]
 },
-WindowSize->{1610, 1067},
+WindowSize->{1452, 1157},
 Visible->True,
 ScrollingOptions->{"VerticalScrollRange"->Fit},
 ShowCellBracket->Automatic,
@@ -275,11 +277,11 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[1464, 33, 10171, 222, 312, "Output"]
+Cell[1464, 33, 10171, 224, 320, "Output"]
 }
 ]
 *)
 
 (* End of internal cache information *)
 
-(* NotebookSignature axT8XqoMsFamDBw8ar9UIZ1g *)
+(* NotebookSignature 8vTkcVteufuVoC1v7s1T6Zwq *)
