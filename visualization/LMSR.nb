@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[    130869,       2964]
-NotebookOptionsPosition[    128527,       2883]
-NotebookOutlinePosition[    128871,       2898]
-CellTagsIndexPosition[    128828,       2895]
+NotebookDataLength[    132189,       2989]
+NotebookOptionsPosition[    129846,       2908]
+NotebookOutlinePosition[    130189,       2923]
+CellTagsIndexPosition[    130146,       2920]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -2352,9 +2352,9 @@ Cell[BoxData[
 Cell[BoxData[
  TagBox[
   StyleBox[
-   DynamicModuleBox[{$CellContext`bankroll$$ = 70, $CellContext`belief$$ = 
-    60, $CellContext`noAssets$$ = 130, $CellContext`start$$ = 
-    40, $CellContext`yesAssets$$ = -155, Typeset`show$$ = True, 
+   DynamicModuleBox[{$CellContext`bankroll$$ = 388, $CellContext`belief$$ = 
+    63.1, $CellContext`noAssets$$ = -36, $CellContext`start$$ = 
+    63.5, $CellContext`yesAssets$$ = 26, Typeset`show$$ = True, 
     Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
     Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
     "\"untitled\"", Typeset`specs$$ = {{{
@@ -2561,21 +2561,29 @@ Cell[BoxData[
    RowBox[{
     RowBox[{
      RowBox[{"yesCost", "[", 
-      RowBox[{"start", ",", "target"}], "]"}], ">", "0"}], ",", 
-    "\[IndentingNewLine]", 
-    RowBox[{"TimeValue", "[", 
-     RowBox[{
-      RowBox[{"yesCost", "[", 
-       RowBox[{"start", ",", "target"}], "]"}], ",", 
-      RowBox[{"EffectiveInterest", "[", 
+      RowBox[{"start", ",", "target"}], "]"}], ">", 
+     RowBox[{"noCost", "[", 
+      RowBox[{"start", ",", "target"}], "]"}]}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"TimeValue", "[", 
+      RowBox[{
        RowBox[{
-        RowBox[{"annualRate", "/", "100"}], ",", 
-        RowBox[{"1", "/", "12"}]}], "]"}], ",", 
-      RowBox[{"-", "monthsToResolution"}]}], "]"}], ",", 
-    "\[IndentingNewLine]", 
+        RowBox[{"yesCost", "[", 
+         RowBox[{"start", ",", "target"}], "]"}], "-", 
+        RowBox[{"noCost", "[", 
+         RowBox[{"start", ",", "target"}], "]"}]}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"EffectiveInterest", "[", 
+        RowBox[{
+         RowBox[{"annualRate", "/", "100"}], ",", 
+         RowBox[{"1", "/", "12"}]}], "]"}], ",", 
+       RowBox[{"-", "monthsToResolution"}]}], "]"}], "+", 
+     RowBox[{"noCost", "[", 
+      RowBox[{"start", ",", "target"}], "]"}]}], ",", "\[IndentingNewLine]", 
     RowBox[{"yesCost", "[", 
      RowBox[{"start", ",", "target"}], "]"}]}], "]"}]}]], "Input",
- CellChangeTimes->{{3.6163774775820584`*^9, 3.6163775038795624`*^9}}],
+ CellChangeTimes->{{3.6163774775820584`*^9, 3.6163775038795624`*^9}, {
+   3.617142966110795*^9, 3.6171429970205626`*^9}, 3.6171431189345355`*^9}],
 
 Cell[BoxData[
  RowBox[{
@@ -2587,21 +2595,29 @@ Cell[BoxData[
    RowBox[{
     RowBox[{
      RowBox[{"noCost", "[", 
-      RowBox[{"start", ",", "target"}], "]"}], ">", "0"}], ",", 
-    "\[IndentingNewLine]", 
-    RowBox[{"TimeValue", "[", 
-     RowBox[{
-      RowBox[{"noCost", "[", 
-       RowBox[{"start", ",", "target"}], "]"}], ",", 
-      RowBox[{"EffectiveInterest", "[", 
+      RowBox[{"start", ",", "target"}], "]"}], ">", 
+     RowBox[{"yesCost", "[", 
+      RowBox[{"start", ",", "target"}], "]"}]}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"TimeValue", "[", 
+      RowBox[{
        RowBox[{
-        RowBox[{"annualRate", "/", "100"}], ",", 
-        RowBox[{"1", "/", "12"}]}], "]"}], ",", 
-      RowBox[{"-", "monthsToResolution"}]}], "]"}], ",", 
-    "\[IndentingNewLine]", 
+        RowBox[{"noCost", "[", 
+         RowBox[{"start", ",", "target"}], "]"}], "-", 
+        RowBox[{"yesCost", "[", 
+         RowBox[{"start", ",", "target"}], "]"}]}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"EffectiveInterest", "[", 
+        RowBox[{
+         RowBox[{"annualRate", "/", "100"}], ",", 
+         RowBox[{"1", "/", "12"}]}], "]"}], ",", 
+       RowBox[{"-", "monthsToResolution"}]}], "]"}], "+", 
+     RowBox[{"yesCost", "[", 
+      RowBox[{"start", ",", "target"}], "]"}]}], ",", "\[IndentingNewLine]", 
     RowBox[{"noCost", "[", 
      RowBox[{"start", ",", "target"}], "]"}]}], "]"}]}]], "Input",
- CellChangeTimes->{{3.6163775113769913`*^9, 3.61637752288865*^9}}],
+ CellChangeTimes->{{3.6163775113769913`*^9, 3.61637752288865*^9}, {
+   3.617142973397211*^9, 3.6171430030189056`*^9}, 3.617143120525627*^9}],
 
 Cell[CellGroupData[{
 
@@ -2751,30 +2767,30 @@ Cell[BoxData[
  TagBox[
   StyleBox[
    DynamicModuleBox[{$CellContext`annualRate$$ = 
-    10., $CellContext`monthsToResolution$$ = 0., $CellContext`start$$ = 
-    33.3, $CellContext`tradeto$$ = 66.6, Typeset`show$$ = True, 
-    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
-    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
-    "\"untitled\"", Typeset`specs$$ = {{{
+    9.9, $CellContext`monthsToResolution$$ = 
+    3.3000000000000003`, $CellContext`start$$ = 33.3, $CellContext`tradeto$$ =
+     66.6, Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
        Hold[$CellContext`start$$], 33.3}, 0.5, 99.5, 0.5}, {{
        Hold[$CellContext`tradeto$$], 66.6}, 0.5, 99.5, 0.5}, {{
        Hold[$CellContext`annualRate$$], 10.}, 0.1, 20, 0.1}, {{
        Hold[$CellContext`monthsToResolution$$], 2}, 0, 48}}, 
     Typeset`size$$ = {576., {175., 179.}}, Typeset`update$$ = 0, 
     Typeset`initDone$$, Typeset`skipInitDone$$ = 
-    False, $CellContext`start$185437$$ = 0, $CellContext`tradeto$185438$$ = 
-    0, $CellContext`annualRate$185439$$ = 
-    0, $CellContext`monthsToResolution$185440$$ = 0}, 
+    False, $CellContext`start$210553$$ = 0, $CellContext`tradeto$210554$$ = 
+    0, $CellContext`annualRate$210555$$ = 
+    0, $CellContext`monthsToResolution$210556$$ = 0}, 
     DynamicBox[Manipulate`ManipulateBoxes[
      1, StandardForm, 
       "Variables" :> {$CellContext`annualRate$$ = 
         10., $CellContext`monthsToResolution$$ = 2, $CellContext`start$$ = 
         33.3, $CellContext`tradeto$$ = 66.6}, "ControllerVariables" :> {
-        Hold[$CellContext`start$$, $CellContext`start$185437$$, 0], 
-        Hold[$CellContext`tradeto$$, $CellContext`tradeto$185438$$, 0], 
-        Hold[$CellContext`annualRate$$, $CellContext`annualRate$185439$$, 0], 
+        Hold[$CellContext`start$$, $CellContext`start$210553$$, 0], 
+        Hold[$CellContext`tradeto$$, $CellContext`tradeto$210554$$, 0], 
+        Hold[$CellContext`annualRate$$, $CellContext`annualRate$210555$$, 0], 
         Hold[$CellContext`monthsToResolution$$, \
-$CellContext`monthsToResolution$185440$$, 0]}, 
+$CellContext`monthsToResolution$210556$$, 0]}, 
       "OtherVariables" :> {
        Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
         Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
@@ -2832,19 +2848,31 @@ $CellContext`monthsToResolution$$]}, {Center,
           Blank[]], 
          Pattern[$CellContext`monthsToResolution, 
           Blank[]]] := 
-       If[$CellContext`yesCost[$CellContext`start, $CellContext`target] > 0, 
-         TimeValue[
-          $CellContext`yesCost[$CellContext`start, $CellContext`target], 
-          
-          EffectiveInterest[$CellContext`annualRate/100, 1/
-           12], -$CellContext`monthsToResolution], 
+       If[$CellContext`yesCost[$CellContext`start, $CellContext`target] > \
+$CellContext`noCost[$CellContext`start, $CellContext`target], 
+         TimeValue[$CellContext`yesCost[$CellContext`start, \
+$CellContext`target] - $CellContext`noCost[$CellContext`start, \
+$CellContext`target], 
+           
+           EffectiveInterest[$CellContext`annualRate/100, 1/
+            12], -$CellContext`monthsToResolution] + \
+$CellContext`noCost[$CellContext`start, $CellContext`target], 
          $CellContext`yesCost[$CellContext`start, $CellContext`target]], \
 $CellContext`yesCost[
          Pattern[$CellContext`i, 
           Blank[]], 
          Pattern[$CellContext`t, 
           Blank[]]] := 
-       100 Log[2, $CellContext`t/$CellContext`i], $CellContext`TVnoCost[
+       100 Log[2, $CellContext`t/$CellContext`i], $CellContext`t[
+         Pattern[$CellContext`e, 
+          Blank[]]] := 
+       Reduce[$CellContext`e, $CellContext`x, Reals], $CellContext`noCost[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`t, 
+          Blank[]]] := 
+       100 Log[2, (100 - $CellContext`t)/(
+          100 - $CellContext`i)], $CellContext`TVnoCost[
          Pattern[$CellContext`start, 
           Blank[]], 
          Pattern[$CellContext`target, 
@@ -2853,19 +2881,16 @@ $CellContext`yesCost[
           Blank[]], 
          Pattern[$CellContext`monthsToResolution, 
           Blank[]]] := 
-       If[$CellContext`noCost[$CellContext`start, $CellContext`target] > 0, 
-         TimeValue[
-          $CellContext`noCost[$CellContext`start, $CellContext`target], 
-          
-          EffectiveInterest[$CellContext`annualRate/100, 1/
-           12], -$CellContext`monthsToResolution], 
-         $CellContext`noCost[$CellContext`start, $CellContext`target]], \
-$CellContext`noCost[
-         Pattern[$CellContext`i, 
-          Blank[]], 
-         Pattern[$CellContext`t, 
-          Blank[]]] := 
-       100 Log[2, (100 - $CellContext`t)/(100 - $CellContext`i)]}; 
+       If[$CellContext`noCost[$CellContext`start, $CellContext`target] > \
+$CellContext`yesCost[$CellContext`start, $CellContext`target], 
+         TimeValue[$CellContext`noCost[$CellContext`start, \
+$CellContext`target] - $CellContext`yesCost[$CellContext`start, \
+$CellContext`target], 
+           
+           EffectiveInterest[$CellContext`annualRate/100, 1/
+            12], -$CellContext`monthsToResolution] + \
+$CellContext`yesCost[$CellContext`start, $CellContext`target], 
+         $CellContext`noCost[$CellContext`start, $CellContext`target]]}; 
      Typeset`initDone$$ = True),
     SynchronousInitialization->True,
     UnsavedVariables:>{Typeset`initDone$$},
@@ -2878,11 +2903,11 @@ $CellContext`noCost[
    3.6163771597968817`*^9, 3.616377188593529*^9}, 3.6163772199913254`*^9, 
    3.6163773068632936`*^9, 3.616377361656428*^9, {3.6163774050079074`*^9, 
    3.6163774140684257`*^9}, 3.616377695294511*^9, 3.616377740957123*^9, {
-   3.616377986742181*^9, 3.6163780032991276`*^9}}]
+   3.616377986742181*^9, 3.6163780032991276`*^9}, 3.617143012464446*^9}]
 }, Open  ]]
 },
-WindowSize->{1452, 1157},
-WindowMargins->{{Automatic, 327}, {72, Automatic}},
+WindowSize->{1272, 1157},
+WindowMargins->{{Automatic, 549}, {7, Automatic}},
 FrontEndVersion->"10.0 for Microsoft Windows (64-bit) (July 1, 2014)",
 StyleDefinitions->"Default.nb"
 ]
@@ -2957,14 +2982,14 @@ Cell[88075, 1996, 3802, 68, 532, "Output"]
 Cell[91892, 2067, 469, 8, 84, "Text"],
 Cell[CellGroupData[{
 Cell[92386, 2079, 12116, 270, 772, "Input"],
-Cell[104505, 2351, 10160, 195, 648, "Output"]
+Cell[104505, 2351, 10163, 195, 648, "Output"]
 }, Open  ]],
-Cell[114680, 2549, 185, 2, 46, "Text"],
-Cell[114868, 2553, 869, 24, 72, "Input"],
-Cell[115740, 2579, 862, 24, 72, "Input"],
+Cell[114683, 2549, 185, 2, 46, "Text"],
+Cell[114871, 2553, 1252, 32, 92, "Input"],
+Cell[116126, 2587, 1246, 32, 92, "Input"],
 Cell[CellGroupData[{
-Cell[116627, 2607, 5462, 140, 512, "Input"],
-Cell[122092, 2749, 6419, 131, 546, "Output"]
+Cell[117397, 2623, 5462, 140, 512, "Input"],
+Cell[122862, 2765, 6968, 140, 546, "Output"]
 }, Open  ]]
 }
 ]
