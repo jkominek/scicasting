@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[    132189,       2989]
-NotebookOptionsPosition[    129846,       2908]
-NotebookOutlinePosition[    130189,       2923]
-CellTagsIndexPosition[    130146,       2920]
+NotebookDataLength[    149371,       3379]
+NotebookOptionsPosition[    146856,       3294]
+NotebookOutlinePosition[    147198,       3309]
+CellTagsIndexPosition[    147155,       3306]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -609,7 +609,7 @@ Cell[BoxData[
     1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
        Hold[$CellContext`start$$], 50}, 0.5, 99.5, 0.5}, {{
        Hold[$CellContext`available$$], 5000}, 100, 5000, 10}}, 
-    Typeset`size$$ = {630., {87., 94.}}, Typeset`update$$ = 0, 
+    Typeset`size$$ = {581., {87., 94.}}, Typeset`update$$ = 0, 
     Typeset`initDone$$, Typeset`skipInitDone$$ = 
     False, $CellContext`start$745280$$ = 0, $CellContext`available$745281$$ = 
     0}, 
@@ -655,7 +655,7 @@ Cell[BoxData[
          Appearance -> "Labeled"}, {{$CellContext`available$$, 5000}, 100, 
          5000, 10, Appearance -> "Labeled"}}, "Options" :> {}, 
       "DefaultOptions" :> {}],
-     ImageSizeCache->{681., {148., 155.}},
+     ImageSizeCache->{632., {148., 155.}},
      SingleEvaluation->True],
     Deinitialization:>None,
     DynamicModuleValues:>{},
@@ -2768,8 +2768,8 @@ Cell[BoxData[
   StyleBox[
    DynamicModuleBox[{$CellContext`annualRate$$ = 
     9.9, $CellContext`monthsToResolution$$ = 
-    3.3000000000000003`, $CellContext`start$$ = 33.3, $CellContext`tradeto$$ =
-     66.6, Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    3.3000000000000003`, $CellContext`start$$ = 10., $CellContext`tradeto$$ = 
+    69., Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
     Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
     1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
        Hold[$CellContext`start$$], 33.3}, 0.5, 99.5, 0.5}, {{
@@ -2904,10 +2904,396 @@ $CellContext`yesCost[$CellContext`start, $CellContext`target],
    3.6163773068632936`*^9, 3.616377361656428*^9, {3.6163774050079074`*^9, 
    3.6163774140684257`*^9}, 3.616377695294511*^9, 3.616377740957123*^9, {
    3.616377986742181*^9, 3.6163780032991276`*^9}, 3.617143012464446*^9}]
-}, Open  ]]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"TVexpectedOutcome", " ", "[", 
+   RowBox[{
+   "i_", ",", "b_", ",", "t_", ",", "annualRate_", ",", "monthsToResolution_",
+     ",", 
+    RowBox[{"neg_:", "0"}], ",", 
+    RowBox[{"pos_:", "0"}]}], "]"}], " ", ":=", " ", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"b", "/", "100"}], "*", 
+    RowBox[{"(", 
+     RowBox[{"pos", "+", 
+      RowBox[{"TVyesCost", "[", 
+       RowBox[{"i", ",", "t", ",", "annualRate", ",", "monthsToResolution"}], 
+       "]"}]}], ")"}]}], "+", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"1", "-", 
+      RowBox[{"b", "/", "100"}]}], ")"}], "*", 
+    RowBox[{"(", 
+     RowBox[{"neg", "+", 
+      RowBox[{"TVnoCost", "[", 
+       RowBox[{"i", ",", "t", ",", "annualRate", ",", "monthsToResolution"}], 
+       "]"}]}], ")"}]}]}]}]], "Input",
+ CellChangeTimes->{{3.617147597518696*^9, 3.6171476933871794`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"With", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"best", "=", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"belief", "<", "start"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"NArgMax", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"TVexpectedOutcome", " ", "[", 
+              RowBox[{
+              "start", ",", "belief", ",", "target", ",", "annualRate", ",", 
+               "monthsToResolution"}], "]"}], ",", "\[IndentingNewLine]", 
+             RowBox[{"belief", "<=", "target", "\[LessEqual]", "start"}]}], 
+            "}"}], ",", "target", ",", 
+           RowBox[{"WorkingPrecision", "\[Rule]", "MachinePrecision"}]}], 
+          "]"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"NArgMax", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"TVexpectedOutcome", " ", "[", 
+              RowBox[{
+              "start", ",", "belief", ",", "target", ",", "annualRate", ",", 
+               "monthsToResolution"}], "]"}], ",", "\[IndentingNewLine]", 
+             RowBox[{"start", "<=", "target", "\[LessEqual]", "belief"}]}], 
+            "}"}], ",", "target", ",", 
+           RowBox[{"WorkingPrecision", "\[Rule]", "MachinePrecision"}]}], 
+          "]"}]}], "]"}]}], "}"}], ",", "\n", "  ", 
+     RowBox[{"Plot", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"TVexpectedOutcome", " ", "[", 
+         RowBox[{
+         "start", ",", "belief", ",", "target", ",", "annualRate", ",", 
+          "monthsToResolution"}], "]"}], "}"}], ",", "\n", "       ", 
+       RowBox[{"{", 
+        RowBox[{"target", ",", "0.5", ",", "99.5"}], "}"}], ",", "\n", 
+       "       ", 
+       RowBox[{"ImageSize", "\[Rule]", "Large"}], ",", "\n", "       ", 
+       RowBox[{"AxesLabel", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"\"\<%\>\"", ",", "\"\<Present Points\>\""}], "}"}]}], ",", 
+       "\n", "       ", 
+       RowBox[{"PerformanceGoal", "\[Rule]", "\"\<Speed\>\""}], ",", 
+       "\[IndentingNewLine]", "  ", 
+       RowBox[{"ColorFunctionScaling", "\[Rule]", "False"}], ",", "\n", 
+       "       ", 
+       RowBox[{"ColorFunction", "\[Rule]", 
+        RowBox[{"Function", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"x", ",", "y"}], "}"}], ",", 
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{"y", ">", "0"}], ",", "Blue", ",", "Orange"}], "]"}]}], 
+         "]"}]}], ",", "\n", "       ", 
+       RowBox[{"PlotRange", "->", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"0", ",", "100"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"-", "500"}], ",", "Automatic"}], "}"}]}], "}"}]}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"PlotPoints", "\[Rule]", "99"}], ",", "\n", "       ", 
+       RowBox[{"GridLines", " ", "->", " ", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"start", ",", "belief", ",", "best"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"TVexpectedOutcome", " ", "[", 
+            RowBox[{
+            "start", ",", "belief", ",", "best", ",", "annualRate", ",", 
+             "monthsToResolution"}], "]"}], "}"}]}], "}"}]}], ",", "\n", 
+       "       ", 
+       RowBox[{"Ticks", " ", "->", " ", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+           "0", ",", "10", ",", "25", ",", "50", ",", "75", ",", "90", ",", 
+            "100", ",", 
+            RowBox[{"{", 
+             RowBox[{"start", ",", "S"}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"belief", ",", "B"}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"best", ",", "max"}], "}"}]}], "}"}], ",", "Automatic"}],
+          "}"}]}], ",", 
+       RowBox[{"Epilog", "->", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"Text", "[", 
+           RowBox[{
+            RowBox[{"Round", "[", 
+             RowBox[{"TVexpectedOutcome", " ", "[", 
+              RowBox[{
+              "start", ",", "belief", ",", "belief", ",", "annualRate", ",", 
+               "monthsToResolution"}], "]"}], "]"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"belief", ",", 
+              RowBox[{"TVexpectedOutcome", " ", "[", 
+               RowBox[{
+               "start", ",", "belief", ",", "belief", ",", "annualRate", ",", 
+                "monthsToResolution"}], "]"}]}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"Center", ",", "Bottom"}], "}"}]}], "]"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"Text", "[", 
+           RowBox[{
+            RowBox[{"Round", "[", 
+             RowBox[{"TVexpectedOutcome", " ", "[", 
+              RowBox[{
+              "start", ",", "belief", ",", "best", ",", "annualRate", ",", 
+               "monthsToResolution"}], "]"}], "]"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"best", ",", 
+              RowBox[{"TVexpectedOutcome", " ", "[", 
+               RowBox[{
+               "start", ",", "belief", ",", "best", ",", "annualRate", ",", 
+                "monthsToResolution"}], "]"}]}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"Center", ",", "Bottom"}], "}"}]}], "]"}]}], "\n", 
+         "               ", "}"}]}]}], "\n", "       ", "]"}]}], "]"}], ",", 
+   "\n", "  ", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"start", ",", 
+       RowBox[{"N", "[", "33.3", "]"}]}], "}"}], ",", "0.5", ",", "99.5", ",",
+      "0.5", ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}], ",", "\n",
+    "  ", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"belief", ",", 
+       RowBox[{"N", "[", "66.6", "]"}]}], "}"}], ",", "0.5", ",", "99.5", ",",
+      "0.5", ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"annualRate", ",", 
+       RowBox[{"N", "[", "10", "]"}]}], "}"}], ",", "0.1", ",", "20", ",", 
+     "0.1", ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"monthsToResolution", ",", "2"}], "}"}], ",", "0", ",", "48", 
+     ",", 
+     RowBox[{
+      RowBox[{"1", "Appearance"}], "\[Rule]", "\"\<Labeled\>\""}]}], "}"}], 
+   ",", "\[IndentingNewLine]", 
+   RowBox[{"ContinuousAction", "\[Rule]", "False"}], ",", "\n", "  ", 
+   RowBox[{"SaveDefinitions", " ", "->", " ", "True"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.617143467825491*^9, 3.617143551594282*^9}, {
+   3.61714712396161*^9, 3.617147186411182*^9}, 3.6171472557551484`*^9, {
+   3.617147292432246*^9, 3.6171474095519447`*^9}, {3.6171475089306293`*^9, 
+   3.617147575458434*^9}, {3.6171477066089354`*^9, 3.6171477575518494`*^9}, {
+   3.6171477897606916`*^9, 3.617147821781523*^9}, {3.6171478541463747`*^9, 
+   3.6171480148545666`*^9}, {3.617148364865586*^9, 3.6171483660676546`*^9}, {
+   3.617148478719098*^9, 3.617148497802189*^9}, {3.617148529712014*^9, 
+   3.6171485495471487`*^9}, 3.6171486279916353`*^9, {3.6171487187148247`*^9, 
+   3.6171487243081446`*^9}, {3.6171488267930064`*^9, 3.617148868495392*^9}, {
+   3.6171489293858747`*^9, 3.617148936599287*^9}}],
+
+Cell["\<\
+The maximization being performed in this one is slow, so it only attempts to \
+update when you release a control.\
+\>", "Text",
+ CellChangeTimes->{{3.6171490151097775`*^9, 3.6171490355229454`*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`annualRate$$ = 0.6, $CellContext`belief$$ = 
+    0.5, $CellContext`monthsToResolution$$ = 48., $CellContext`start$$ = 51., 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`start$$], 33.3}, 0.5, 99.5, 0.5}, {{
+       Hold[$CellContext`belief$$], 66.6}, 0.5, 99.5, 0.5}, {{
+       Hold[$CellContext`annualRate$$], 10.}, 0.1, 20, 0.1}, {{
+       Hold[$CellContext`monthsToResolution$$], 2}, 0, 48}}, 
+    Typeset`size$$ = {576., {173., 178.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`start$705214$$ = 0, $CellContext`belief$705215$$ = 
+    0, $CellContext`annualRate$705216$$ = 
+    0, $CellContext`monthsToResolution$705217$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`annualRate$$ = 10., $CellContext`belief$$ = 
+        66.6, $CellContext`monthsToResolution$$ = 2, $CellContext`start$$ = 
+        33.3}, "ControllerVariables" :> {
+        Hold[$CellContext`start$$, $CellContext`start$705214$$, 0], 
+        Hold[$CellContext`belief$$, $CellContext`belief$705215$$, 0], 
+        Hold[$CellContext`annualRate$$, $CellContext`annualRate$705216$$, 0], 
+        Hold[$CellContext`monthsToResolution$$, \
+$CellContext`monthsToResolution$705217$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      With[{$CellContext`best$ = 
+         If[$CellContext`belief$$ < $CellContext`start$$, 
+           NArgMax[{
+             $CellContext`TVexpectedOutcome[$CellContext`start$$, \
+$CellContext`belief$$, $CellContext`target, $CellContext`annualRate$$, \
+$CellContext`monthsToResolution$$], $CellContext`belief$$ <= \
+$CellContext`target <= $CellContext`start$$}, $CellContext`target, 
+            WorkingPrecision -> MachinePrecision], 
+           NArgMax[{
+             $CellContext`TVexpectedOutcome[$CellContext`start$$, \
+$CellContext`belief$$, $CellContext`target, $CellContext`annualRate$$, \
+$CellContext`monthsToResolution$$], $CellContext`start$$ <= \
+$CellContext`target <= $CellContext`belief$$}, $CellContext`target, 
+            WorkingPrecision -> MachinePrecision]]}, 
+        Plot[{
+          $CellContext`TVexpectedOutcome[$CellContext`start$$, \
+$CellContext`belief$$, $CellContext`target, $CellContext`annualRate$$, \
+$CellContext`monthsToResolution$$]}, {$CellContext`target, 0.5, 99.5}, 
+         ImageSize -> Large, AxesLabel -> {"%", "Present Points"}, 
+         PerformanceGoal -> "Speed", ColorFunctionScaling -> False, 
+         ColorFunction -> Function[{$CellContext`x, $CellContext`y}, 
+           If[$CellContext`y > 0, Blue, Orange]], 
+         PlotRange -> {{0, 100}, {-500, Automatic}}, PlotPoints -> 99, 
+         GridLines -> {{$CellContext`start$$, $CellContext`belief$$, \
+$CellContext`best$}, {
+            $CellContext`TVexpectedOutcome[$CellContext`start$$, \
+$CellContext`belief$$, $CellContext`best$, $CellContext`annualRate$$, \
+$CellContext`monthsToResolution$$]}}, 
+         Ticks -> {{
+           0, 10, 25, 50, 75, 90, 
+            100, {$CellContext`start$$, $CellContext`S}, \
+{$CellContext`belief$$, $CellContext`B}, {$CellContext`best$, \
+$CellContext`max}}, Automatic}, Epilog -> {
+           Text[
+            Round[
+             $CellContext`TVexpectedOutcome[$CellContext`start$$, \
+$CellContext`belief$$, $CellContext`belief$$, $CellContext`annualRate$$, \
+$CellContext`monthsToResolution$$]], {$CellContext`belief$$, 
+             $CellContext`TVexpectedOutcome[$CellContext`start$$, \
+$CellContext`belief$$, $CellContext`belief$$, $CellContext`annualRate$$, \
+$CellContext`monthsToResolution$$]}, {Center, Bottom}], 
+           Text[
+            Round[
+             $CellContext`TVexpectedOutcome[$CellContext`start$$, \
+$CellContext`belief$$, $CellContext`best$, $CellContext`annualRate$$, \
+$CellContext`monthsToResolution$$]], {$CellContext`best$, 
+             $CellContext`TVexpectedOutcome[$CellContext`start$$, \
+$CellContext`belief$$, $CellContext`best$, $CellContext`annualRate$$, \
+$CellContext`monthsToResolution$$]}, {Center, Bottom}]}]], 
+      "Specifications" :> {{{$CellContext`start$$, 33.3}, 0.5, 99.5, 0.5, 
+         Appearance -> "Labeled"}, {{$CellContext`belief$$, 66.6}, 0.5, 99.5, 
+         0.5, Appearance -> "Labeled"}, {{$CellContext`annualRate$$, 10.}, 
+         0.1, 20, 0.1, Appearance -> 
+         "Labeled"}, {{$CellContext`monthsToResolution$$, 2}, 0, 48, 
+         Appearance -> "Labeled"}}, "Options" :> {ContinuousAction -> False}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{627., {260., 267.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`TVexpectedOutcome[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`b, 
+          Blank[]], 
+         Pattern[$CellContext`t, 
+          Blank[]], 
+         Pattern[$CellContext`annualRate, 
+          Blank[]], 
+         Pattern[$CellContext`monthsToResolution, 
+          Blank[]], 
+         Optional[
+          Pattern[$CellContext`neg, 
+           Blank[]], 0], 
+         Optional[
+          Pattern[$CellContext`pos, 
+           Blank[]], 0]] := ($CellContext`b/
+          100) ($CellContext`pos + $CellContext`TVyesCost[$CellContext`i, \
+$CellContext`t, $CellContext`annualRate, $CellContext`monthsToResolution]) + (
+          1 - $CellContext`b/
+          100) ($CellContext`neg + $CellContext`TVnoCost[$CellContext`i, \
+$CellContext`t, $CellContext`annualRate, $CellContext`monthsToResolution]), \
+$CellContext`t[
+         Pattern[$CellContext`e, 
+          Blank[]]] := 
+       Reduce[$CellContext`e, $CellContext`x, Reals], $CellContext`TVyesCost[
+         Pattern[$CellContext`start, 
+          Blank[]], 
+         Pattern[$CellContext`target, 
+          Blank[]], 
+         Pattern[$CellContext`annualRate, 
+          Blank[]], 
+         Pattern[$CellContext`monthsToResolution, 
+          Blank[]]] := 
+       If[$CellContext`yesCost[$CellContext`start, $CellContext`target] > \
+$CellContext`noCost[$CellContext`start, $CellContext`target], 
+         TimeValue[$CellContext`yesCost[$CellContext`start, \
+$CellContext`target] - $CellContext`noCost[$CellContext`start, \
+$CellContext`target], 
+           
+           EffectiveInterest[$CellContext`annualRate/100, 1/
+            12], -$CellContext`monthsToResolution] + \
+$CellContext`noCost[$CellContext`start, $CellContext`target], 
+         $CellContext`yesCost[$CellContext`start, $CellContext`target]], \
+$CellContext`yesCost[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`t, 
+          Blank[]]] := 
+       100 Log[2, $CellContext`t/$CellContext`i], $CellContext`noCost[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`t, 
+          Blank[]]] := 
+       100 Log[2, (100 - $CellContext`t)/(
+          100 - $CellContext`i)], $CellContext`TVnoCost[
+         Pattern[$CellContext`start, 
+          Blank[]], 
+         Pattern[$CellContext`target, 
+          Blank[]], 
+         Pattern[$CellContext`annualRate, 
+          Blank[]], 
+         Pattern[$CellContext`monthsToResolution, 
+          Blank[]]] := 
+       If[$CellContext`noCost[$CellContext`start, $CellContext`target] > \
+$CellContext`yesCost[$CellContext`start, $CellContext`target], 
+         TimeValue[$CellContext`noCost[$CellContext`start, \
+$CellContext`target] - $CellContext`yesCost[$CellContext`start, \
+$CellContext`target], 
+           EffectiveInterest[$CellContext`annualRate/100, 1/
+            12], -$CellContext`monthsToResolution] + \
+$CellContext`yesCost[$CellContext`start, $CellContext`target], 
+         $CellContext`noCost[$CellContext`start, $CellContext`target]]}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{
+  3.617148872275608*^9, {3.6171489377233515`*^9, 3.617148996853733*^9}}]
 },
 WindowSize->{1272, 1157},
-WindowMargins->{{Automatic, 549}, {7, Automatic}},
+WindowMargins->{{Automatic, 39}, {7, Automatic}},
 FrontEndVersion->"10.0 for Microsoft Windows (64-bit) (July 1, 2014)",
 StyleDefinitions->"Default.nb"
 ]
@@ -2989,8 +3375,12 @@ Cell[114871, 2553, 1252, 32, 92, "Input"],
 Cell[116126, 2587, 1246, 32, 92, "Input"],
 Cell[CellGroupData[{
 Cell[117397, 2623, 5462, 140, 512, "Input"],
-Cell[122862, 2765, 6968, 140, 546, "Output"]
-}, Open  ]]
+Cell[122862, 2765, 6966, 140, 546, "Output"]
+}, Open  ]],
+Cell[129843, 2908, 866, 25, 52, "Input"],
+Cell[130712, 2935, 7420, 176, 592, "Input"],
+Cell[138135, 3113, 207, 4, 30, "Text"],
+Cell[138345, 3119, 8507, 173, 544, "Output"]
 }
 ]
 *)
