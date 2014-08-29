@@ -18,10 +18,16 @@
 			<parents>Dolly_named</parents>
 			<probabilities>0.987162 0.01283800000000002 0 1</probabilities>
 		</cpt>
-		<cpt id="Gonzalo_named">
+		<cpt id="Fay_named">
 			<state id="Yes" />
 			<state id="No" />
 			<parents>Edouard_named</parents>
+			<probabilities>0.98 0.02000000000000002 0 1</probabilities>
+		</cpt>
+		<cpt id="Gonzalo_named">
+			<state id="Yes" />
+			<state id="No" />
+			<parents>Fay_named</parents>
 			<probabilities>0.97399 0.02600999999999998 0 1</probabilities>
 		</cpt>
 		<cpt id="Hanna_named">
@@ -40,19 +46,19 @@
 			<state id="Yes" />
 			<state id="No" />
 			<parents>Cristobal_named</parents>
-			<probabilities>0.521 0.479 0 1</probabilities>
+			<probabilities>0.45 0.55 0 1</probabilities>
 		</cpt>
 		<cpt id="Dolly_hurricane">
 			<state id="Yes" />
 			<state id="No" />
 			<parents>Dolly_named</parents>
-			<probabilities>0.521 0.479 0 1</probabilities>
+			<probabilities>0.475 0.525 0 1</probabilities>
 		</cpt>
 		<cpt id="Edouard_hurricane">
 			<state id="Yes" />
 			<state id="No" />
 			<parents>Edouard_named</parents>
-			<probabilities>0.521 0.479 0 1</probabilities>
+			<probabilities>0.5 0.5 0 1</probabilities>
 		</cpt>
 		<cpt id="Gonzalo_hurricane">
 			<state id="Yes" />
@@ -72,10 +78,11 @@
 			<parents>Isaias_named</parents>
 			<probabilities>0.521 0.479 0 1</probabilities>
 		</cpt>
-		<cpt id="Slippage">
+		<cpt id="Fay_hurricane">
 			<state id="Yes" />
 			<state id="No" />
-			<probabilities>0.01 0.99</probabilities>
+			<parents>Fay_named</parents>
+			<probabilities>0.52 0.48 0 1</probabilities>
 		</cpt>
 		<deterministic id="Next_Hurricane">
 			<state id="Cristobal" />
@@ -85,8 +92,61 @@
 			<state id="Hanna" />
 			<state id="Isaias" />
 			<state id="unk" />
-			<parents>Slippage Cristobal_hurricane Dolly_hurricane Edouard_hurricane Gonzalo_hurricane Hanna_hurricane Isaias_hurricane</parents>
-			<resultingstates>Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Edouard Edouard Edouard Edouard Edouard Edouard Edouard Edouard Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Gonzalo Gonzalo Gonzalo Gonzalo Edouard Edouard Edouard Edouard Hanna Hanna Gonzalo Gonzalo Isaias Hanna unk unk Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Edouard Edouard Edouard Edouard Edouard Edouard Edouard Edouard Gonzalo Gonzalo Gonzalo Gonzalo Hanna Hanna Isaias unk</resultingstates>
+			<parents>Fay_hurricane Cristobal_hurricane Dolly_hurricane Edouard_hurricane Gonzalo_hurricane Hanna_hurricane Isaias_hurricane</parents>
+			<resultingstates>Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Edouard Edouard Edouard Edouard Edouard Edouard Edouard Edouard unk unk unk unk unk unk unk unk Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Edouard Edouard Edouard Edouard Edouard Edouard Edouard Edouard Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Gonzalo Gonzalo Gonzalo Gonzalo Edouard Edouard Edouard Edouard Hanna Hanna Gonzalo Gonzalo Isaias Hanna unk unk</resultingstates>
+		</deterministic>
+		<cpt id="Cristobal_Landfall">
+			<state id="Yes" />
+			<state id="No" />
+			<parents>Cristobal_named</parents>
+			<probabilities>0.31 0.69 0 1</probabilities>
+		</cpt>
+		<cpt id="Dolly_Landfall">
+			<state id="Yes" />
+			<state id="No" />
+			<parents>Dolly_named</parents>
+			<probabilities>0.31 0.69 0 1</probabilities>
+		</cpt>
+		<cpt id="Edouard_Landfall">
+			<state id="Yes" />
+			<state id="No" />
+			<parents>Edouard_named</parents>
+			<probabilities>0.31 0.69 0 1</probabilities>
+		</cpt>
+		<cpt id="Fay_landfall">
+			<state id="Yes" />
+			<state id="No" />
+			<parents>Fay_named</parents>
+			<probabilities>0.31 0.69 0 1</probabilities>
+		</cpt>
+		<cpt id="Gonzalo_landfall">
+			<state id="Yes" />
+			<state id="No" />
+			<parents>Gonzalo_named</parents>
+			<probabilities>0.31 0.69 0 1</probabilities>
+		</cpt>
+		<cpt id="Hanna_landfall">
+			<state id="Yes" />
+			<state id="No" />
+			<parents>Hanna_named</parents>
+			<probabilities>0.31 0.69 0 1</probabilities>
+		</cpt>
+		<cpt id="Isaias_landfall">
+			<state id="Yes" />
+			<state id="No" />
+			<parents>Isaias_named</parents>
+			<probabilities>0.31 0.69 0 1</probabilities>
+		</cpt>
+		<deterministic id="Next_landfall">
+			<state id="Cristobal" />
+			<state id="Dolly" />
+			<state id="Edouard" />
+			<state id="Gonzalo" />
+			<state id="Hanna" />
+			<state id="Isaias" />
+			<state id="Unk_Fay" />
+			<parents>Cristobal_Landfall Dolly_Landfall Edouard_Landfall Fay_landfall Gonzalo_landfall Hanna_landfall Isaias_landfall</parents>
+			<resultingstates>Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Cristobal Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Dolly Edouard Edouard Edouard Edouard Edouard Edouard Edouard Edouard Edouard Edouard Edouard Edouard Edouard Edouard Edouard Edouard Unk_Fay Unk_Fay Unk_Fay Unk_Fay Unk_Fay Unk_Fay Unk_Fay Unk_Fay Gonzalo Gonzalo Gonzalo Gonzalo Hanna Hanna Isaias Unk_Fay</resultingstates>
 		</deterministic>
 	</nodes>
 	<extensions>
@@ -96,7 +156,7 @@
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>93 119 181 174</position>
+				<position>85 31 173 86</position>
 				<barchart active="true" width="128" height="64" />
 			</node>
 			<node id="Dolly_named">
@@ -104,39 +164,39 @@
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>101 235 172 279</position>
-				<barchart active="true" />
+				<position>94 207 165 251</position>
+				<barchart active="true" width="128" height="64" />
 			</node>
 			<node id="Edouard_named">
 				<name>Edouard named</name>
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>99 350 175 388</position>
-				<barchart active="true" />
+				<position>91 381 167 419</position>
+				<barchart active="true" width="128" height="64" />
 			</node>
 			<node id="Gonzalo_named">
 				<name>Gonzalo named</name>
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>94 454 180 507</position>
-				<barchart active="true" />
+				<position>86 716 172 769</position>
+				<barchart active="true" width="128" height="64" />
 			</node>
 			<node id="Hanna_named">
 				<name>Hanna named</name>
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>98 568 176 616</position>
-				<barchart active="true" />
+				<position>90 889 168 937</position>
+				<barchart active="true" width="128" height="64" />
 			</node>
 			<node id="Isaias_named">
 				<name>Isaias named</name>
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>99 681 174 727</position>
+				<position>92 1061 167 1107</position>
 				<barchart active="true" width="128" height="64" />
 			</node>
 			<node id="Cristobal_hurricane">
@@ -144,7 +204,7 @@
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>309 115 410 178</position>
+				<position>335 27 436 90</position>
 				<barchart active="true" width="128" height="64" />
 			</node>
 			<node id="Dolly_hurricane">
@@ -152,7 +212,7 @@
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>317 231 401 283</position>
+				<position>343 203 427 255</position>
 				<barchart active="true" width="128" height="64" />
 			</node>
 			<node id="Edouard_hurricane">
@@ -160,7 +220,7 @@
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>307 337 411 402</position>
+				<position>333 368 437 433</position>
 				<barchart active="true" width="128" height="64" />
 			</node>
 			<node id="Gonzalo_hurricane">
@@ -168,7 +228,7 @@
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>310 450 409 511</position>
+				<position>336 712 435 773</position>
 				<barchart active="true" width="128" height="64" />
 			</node>
 			<node id="Hanna_hurricane">
@@ -176,7 +236,7 @@
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>314 564 405 620</position>
+				<position>340 885 431 941</position>
 				<barchart active="true" width="128" height="64" />
 			</node>
 			<node id="Isaias_hurricane">
@@ -184,7 +244,7 @@
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>315 677 403 732</position>
+				<position>341 1057 429 1112</position>
 				<barchart active="true" width="128" height="64" />
 			</node>
 			<node id="Next_Hurricane">
@@ -192,16 +252,88 @@
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>639 400 728 458</position>
+				<position>871 463 960 521</position>
 				<barchart active="true" width="128" height="144" />
 			</node>
-			<node id="Slippage">
-				<name>Slippage</name>
+			<node id="Fay_named">
+				<name>Fay named</name>
 				<interior color="e5f6f7" />
 				<outline color="000080" />
 				<font color="000000" name="Arial" size="8" />
-				<position>655 192 711 227</position>
+				<position>96 551 162 592</position>
 				<barchart active="true" width="128" height="64" />
+			</node>
+			<node id="Fay_hurricane">
+				<name>Fay hurricane</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>346 547 424 595</position>
+				<barchart active="true" width="128" height="64" />
+			</node>
+			<node id="Cristobal_Landfall">
+				<name>Cristobal Landfall</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>339 114 432 172</position>
+				<barchart active="true" width="128" height="64" />
+			</node>
+			<node id="Dolly_Landfall">
+				<name>Dolly Landfall</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>347 291 423 338</position>
+				<barchart active="true" width="128" height="64" />
+			</node>
+			<node id="Edouard_Landfall">
+				<name>Edouard Landfall</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>340 457 431 513</position>
+				<barchart active="true" width="128" height="64" />
+			</node>
+			<node id="Fay_landfall">
+				<name>Fay landfall</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>351 635 419 677</position>
+				<barchart active="true" width="128" height="64" />
+			</node>
+			<node id="Gonzalo_landfall">
+				<name>Gonzalo landfall</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>341 800 429 855</position>
+				<barchart active="true" width="128" height="64" />
+			</node>
+			<node id="Hanna_landfall">
+				<name>Hanna landfall</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>345 973 425 1023</position>
+				<barchart active="true" width="128" height="64" />
+			</node>
+			<node id="Isaias_landfall">
+				<name>Isaias landfall</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>347 1146 423 1193</position>
+				<barchart active="true" width="128" height="64" />
+			</node>
+			<node id="Next_landfall">
+				<name>Next landfall</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>879 704 957 755</position>
+				<barchart active="true" width="128" height="144" />
 			</node>
 		</genie>
 	</extensions>
