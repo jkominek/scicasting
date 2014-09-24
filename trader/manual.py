@@ -138,9 +138,13 @@ for qid in question_ids:
     print "Question #%i: %s" % (qid, ts[0]['question']['name'])
     print "Probabilities: ", \
         ", ".join([ "%.2f%%" % (p*100.0,) for p in current_probs ])
+
+    # this is just the probabilities shifted up to be larger numbers,
+    # so our poor fleshy brains can think about them in terms of ratios.
     minp = min(current_probs)
     print "  Likelihoods: ", \
         ", ".join([ "%.1f" % (p/minp,) for p in current_probs ])
+
     print "  Your assets: ", \
         ", ".join([ "%.1f" % (a,) for a in assets ])
 
@@ -186,7 +190,9 @@ for qid in question_ids:
     #     probability density function representing your belief.)
     util = evmax(beliefs, current_probs, assets, debt)
 
-    # forces all of the probabilities to sum to 1
+    # this is just a constraint being applied to the minimization
+    # process. it forces all of the probabilities to sum to 1.
+    # removing the constraint will do weird things.
     def con_f(v):
         return sum(v) - 1.0
     con = { 'type': 'eq', 'fun': con_f }
@@ -197,11 +203,16 @@ for qid in question_ids:
     # into your utility function
     res = minimize(util,
                    current_probs,
+                   # these bounds prevent it from trading below
+                   # 0.1% or above 99.9%. you can widen those
+                   # bounds, but there isn't much value in it.
                    bounds=[(0.001, 0.999)] * len(current_probs),
                    constraints=[con],
                    method='slsqp')
 
     if not res.success:
+        # this probably means you replaced the evmax
+        # routine with something else that isn't quite right
         print "*** Trade optimization failed!"
         print "Good luck:"
         print res
@@ -215,20 +226,26 @@ for qid in question_ids:
     print " Target Trade: ", \
         ", ".join([ "%.2f%%" % (p*100.0,) for p in target ])
 
+    # this is how much your assets on every option are
+    # going to change.
     change = lmsr(current_probs,  target)
     print " Asset change: ", \
         ", ".join([ "%.1f" % (c,) for c in change ])
 
+    # this is what your assets will be after the trade
     final = map(lambda a,b: a+b, assets, change)
     print " Final assets: ", ", ".join([ "%.1f" % (f,) for f in final ])
 
+    # this is what the web interface would display for
+    # your credit/debit as you move the slider around
     credit_debit = min(final) - min(assets)
     if credit_debit >= 0.0:
         print "       Credit: %.3f" % (credit_debit,)
     else:
         print "        Debit: %.3f" % (-credit_debit,)
 
-    # check with the user
+    # check with the user.
+    # enter anything start with 'y' to make the trade
     execute_p = raw_input("Execute trade? ")
     if not (len(execute_p)>0 and execute_p.lower()[0]=='y'):
         print "ok, skipping it!"
@@ -237,6 +254,8 @@ for qid in question_ids:
     print "Executing trade!"
     ts = fetch_url("trades/create",
                    {'question_id': qid,
+                    # the 0.0001 is there in case of any
+                    # floating point rounding issues.
                     'max_allowed_cost': 0.0001-min(change),
                     'new_value': ",".join(map(str,target)),
                     'old_values': ",".join(map(str,current_probs)),
@@ -246,7 +265,7 @@ for qid in question_ids:
                     'user_selection': 0,
                 })
 
-    # you could print some stuff about the trade here
+    # here's what scicast says about your trade:
     print " Asset change: ", \
         ", ".join([ "%.1f" % (c,) for c in ts['trade']['assets_per_option'] ])
     print "   New market: ", \
