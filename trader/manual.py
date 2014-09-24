@@ -235,5 +235,19 @@ for qid in question_ids:
         continue
 
     print "Executing trade!"
-    # hah hah i forgot to finish the trade part before i promised
-    # to release this. i'll finish it up really soon!
+    ts = fetch_url("trades/create",
+                   {'question_id': qid,
+                    'max_allowed_cost': 0.0001-min(change),
+                    'new_value': ",".join(map(str,target)),
+                    'old_values': ",".join(map(str,current_probs)),
+                    'include_tradeable_questions': False,
+                    # API docs say to set these to 0
+                    'interface_type': 0,
+                    'user_selection': 0,
+                })
+
+    # you could print some stuff about the trade here
+    print " Asset change: ", \
+        ", ".join([ "%.1f" % (c,) for c in ts['trade']['assets_per_option'] ])
+    print "   New market: ", \
+        ", ".join([ "%.2f%%" % (p*100.0,) for p in ts['trade']['new_value_list'] ])
