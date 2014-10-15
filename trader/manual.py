@@ -105,20 +105,42 @@ def lmsr(old, new):
 # event that you've exceeded that limit, it just treats
 # what you're currently at as the limit. That prevents
 # the optimizer from exploding.
-def evmax(beliefs, start, assets, max_debt):
-    max_debt = min(max_debt, min(assets))
+def evmax(beliefs=None,
+          initial_probabilities=None,
+          initial_assets=None,
+          maximum_debt=None, **kwargs):
+    maximum_debt = min(maximum_debt, min(initial_assets))
     def f(x):
         # compute our state after this hypothetical trade
-        change = lmsr(start, x)
-        final = map(lambda a,b: a+b, assets, change)
+        change = lmsr(initial_probabilities, x)
+        final = map(lambda a,b: a+b, initial_assets, change)
 
-        if min(final)<max_debt:
+        if min(final)<maximum_debt:
             # unacceptable input? positive infinity!
             return numpy.inf
 
         ev = sum(map(lambda b,a: b*a, beliefs, final))
         # we're running a minimizer, so flip the sign
         return -ev
+    return f
+
+# Minimize regret (the difference between whatever you
+# end up with, and the best possible outcome).
+def regret(initial_probabilities=None,
+           initial_assets=None, **kwargs):
+    # compute the best possible outcomes
+    best = initial_assets[:]
+    for i in range(0, len(initial_probabilities)):
+        presumed = [ 0.001 / (len(initial_probabilities)-1) ] * len(initial_probabilities)
+        presumed[i] = 1.0
+        # now sum(presumed) == 1.0
+        change = lmsr(initial_probabilities, presumed)
+        best[i] += change[i]
+    def f(x):
+        change = lmsr(initial_probabilities, x)
+        final = map(lambda a,b: a+b, initial_assets, change)
+        regret = max(map(lambda a,b: a-b, best, final))
+        return regret
     return f
 
 question_ids = map(int, args)
@@ -188,7 +210,13 @@ for qid in question_ids:
     #   - kelly is a bit more complicated for scaled continuous
     #     questions. (got to maximize over an integral of a
     #     probability density function representing your belief.)
-    util = evmax(beliefs, current_probs, assets, debt)
+
+    info = { 'beliefs': beliefs,
+             'initial_probabilities': current_probs,
+             'initial_assets': assets,
+             'maximum_debt': debt }
+    util = evmax(**info)
+    #util = regret(**info)
 
     # this is just a constraint being applied to the minimization
     # process. it forces all of the probabilities to sum to 1.
