@@ -56,16 +56,25 @@ if not os.access(API_KEY_filename, os.R_OK):
     sys.exit(-1)
 USER_ID, API_KEY = [ s.strip() for s in open(API_KEY_filename).readlines() ]
 
+# We keep the opinions right next to the API key, which
+# is fairly out of the way on Windows on Macs. I expect
+# *nix users to be able to adjust this if they don't like
+# that location.
 DB_filename = os.path.expanduser("~/scicast_opinions.db")
+# remember if the DB already existed
 DB_exists = os.access(DB_filename, os.R_OK)
 DB = sqlite3.connect(DB_filename)
 DB_cursor = DB.cursor()
 if not DB_exists:
+    # DB wasn't already here; create our table
     DB_cursor.execute("create table opinions (question int primary key, likelihoods text, max_debt numeric)")
     DB.commit()
 
-LAST_TRADE = datetime(2000,1,1,0,0,0)
+# Program won't execute trades faster than once
+# every INTERTRADE_DELAY seconds. Counts time you
+# spend thinking towards that delay.
 INTERTRADE_DELAY = 20.0
+LAST_TRADE = datetime(2000,1,1,0,0,0)
 
 # Wraps up all of the HTTP action in a single place. Applies
 # the API key, ensures we're gzip'ing things, and leaves you
@@ -93,10 +102,8 @@ def fetch_url(path, args, host="test.scicast.org", ssl=False):
 # Take an array of trade records, count them, total up your
 # assets, and find the current state of the market. Return
 # all of that.
-def summarize_trades(ts, current_probs):
+def summarize_trades(ts):
     trade_count = len(ts)
-    if trade_count == 0:
-        return (0, [ 0.0 for p in current_probs ])
     ts.sort(key=lambda t: t['created_at'])
     assets = ts[0]['assets_per_option']
     for t in ts[1:]:
@@ -143,6 +150,8 @@ def evmax(beliefs=None,
 
 # Minimize regret (the difference between whatever you
 # end up with, and the best possible outcome).
+# Note, this doesn't take into account your beliefs.
+# Probably best used to back out of a question?
 def regret(initial_probabilities=None,
            initial_assets=None, **kwargs):
     # compute the best possible outcomes
@@ -186,7 +195,12 @@ for qid in question_ids:
 
     current_probs = q['prob']
     q = q['question']
-    trade_count, assets = summarize_trades(ts, current_probs)
+    if len(ts) == 0:
+        # if we've never traded, assets are 0 across the board
+        trade_count = 0
+        assets = [ 0.0 for p in current_probs ]
+    else:
+        trade_count, assets = summarize_trades(ts)
     print "Question #%i: %s" % (qid, q['name'])
     print "Probabilities: ", \
         ", ".join([ "%.2f%%" % (p*100.0,) for p in current_probs ])
@@ -210,23 +224,31 @@ for qid in question_ids:
     query_beliefs = True
 
     if result != None:
+        # the database has an opinion for this one
         raw_belief, debt = result
+        # convert the DB-stored values to something we can use
         beliefs = map(float, raw_belief.split())
         debt = float(debt)
 
+        # show the user what we had
         print "\n*** from DB:"
         print "Prior Beliefs: ", \
             ", ".join([ "%.2f" % (p,) for p in beliefs ])
         beliefs = normalize_probabilities(beliefs)
         print "     Max debt: %f" % (-debt,)
+
         if options.autouse_db:
+            # if we're in automode, don't confirm use
             query_beliefs = False
         else:
+            # check to see if the user still likes these
             use_s = raw_input("Use? ")
             if len(use_s)>0 and use_s.lower()[0] != 'n':
                 query_beliefs = False
 
     if query_beliefs:
+        # didn't have anything in the DB, or the user
+        # didn't like it. query them for new numbers
         beliefs = [ ]
         while len(beliefs) != len(current_probs):
             raw_belief = raw_input("Beliefs? ")
@@ -328,33 +350,42 @@ for qid in question_ids:
     new_utility = (-util(target))
     print " Orig utility: ", orig_utility
     print "  New utility: ", new_utility
-    print "  Util change: ", new_utility - orig_utility
+    print "  Util change:  %.4f" % (new_utility - orig_utility,)
 
     if (new_utility - orig_utility) < (orig_utility * 0.001):
         # less than a 0.1% increase in utility
-        # don't waste the server's time
+        # there isn't enough value to make this worth
+        # executing. refuse to do so.
         print "not worth executing; skipping!"
+        print
         continue
 
-    # check with the user.
-    # enter anything start with 'y' to make the trade
+    # if we're not in automatic mode...
     if query_beliefs or (not options.autouse_db):
+        # check with the user
+        # enter anything starting with 'y' to make the trade
         execute_p = raw_input("Execute trade? ")
         if not (len(execute_p)>0 and execute_p.lower()[0]=='y'):
             print "ok, skipping it!"
             continue
 
-    print "Saving beliefs..."
-    DB_cursor.execute("insert or replace into opinions values (?, ?, ?)",
-                      (qid, raw_belief, debt))
-    DB.commit()
+    if query_beliefs:
+        # user gave us something new, keep it
+        print "Saving beliefs..."
+        DB_cursor.execute("insert or replace into opinions values (?, ?, ?)",
+                          (qid, raw_belief, debt))
+        DB.commit()
 
+    # how long between now, and last_trade + INTERTRADE_DELAY ?
     delay = INTERTRADE_DELAY - (datetime.now() - LAST_TRADE).total_seconds()
     if delay <= 0.0:
+        # delay is up, execute immediately
         print "Executing trade!"
     else:
+        # some delay left, wait it out
         print "Executing trade in %.2fs..." % (delay,)
         time.sleep(delay)
+
     ts = fetch_url("trades/create",
                    {'question_id': qid,
                     # the 0.0001 is there in case of any
@@ -374,3 +405,4 @@ for qid in question_ids:
         ", ".join([ "%.1f" % (c,) for c in ts['trade']['assets_per_option'] ])
     print "   New market: ", \
         ", ".join([ "%.2f%%" % (p*100.0,) for p in ts['trade']['new_value_list'] ])
+    print
