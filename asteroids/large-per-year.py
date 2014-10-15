@@ -3,13 +3,16 @@
 from pymc import DiscreteUniform, Exponential, deterministic, Poisson, Uniform, TruncatedNormal
 import numpy as np
 
-linear_array     = np.array([2,3,1,6,0,1,1,0,0,1,0,0])
-spacewatch_array = np.array([1,1,0,0,0,0,0,1,0,0,0,0])
-catalina_array   = np.array([9,5,9,6,4,1,6,6,9,5,4,3])
+linear_array     = np.array([2,3,1,6,0,1,1,0,0,1,0,0,0])
+spacewatch_array = np.array([1,1,0,0,0,0,0,1,0,0,0,0,0])
+catalina_array   = np.array([9,5,9,6,4,1,6,6,9,5,4,3,3])
 # panstarrs went into operation part way through the data
-panstarrs_array  = np.array([None,None,None,None,0,0,1,4,1,2,0,2])
+panstarrs_array  = np.array([None,None,None,None,0,0,1,4,1,2,0,2,2])
 panstarrs_array  = np.ma.masked_equal(panstarrs_array, value=None)
-other_array      = np.array([0,0,0,2,0,0,0,0,0,0,0,1])
+# neowise only on occasionally
+neowise_array    = np.array([None,None,None,None,3,4,0,None,None,None,None,None,2])
+neowise_array    = np.ma.masked_equal(neowise_array, value=None)
+other_array      = np.array([0,0,0,2,0,0,0,0,0,0,0,1,0])
 
 #linear_mean     = Exponential('linear_mean', beta=1., value=1./np.average(linear_array))
 #spacewatch_mean = Exponential('spacewatch_mean', beta=1., value=1./np.average(spacewatch_array))
@@ -26,6 +29,8 @@ mu = np.average(catalina_array)
 catalina_mean   = TruncatedNormal('catalina_mean', a=0, b=10, mu=mu, tau=1., value=mu)
 mu = 1.25
 panstarrs_mean  = TruncatedNormal('panstarrs_mean', a=0, b=10, mu=mu, tau=1., value=mu)
+mu = 2.25
+neowise_mean    = TruncatedNormal('neowise_mean', a=0, b=10, mu=mu, tau=1., value=mu)
 mu = np.average(other_array)
 other_mean      = TruncatedNormal('other_mean', a=0, b=10, mu=mu, tau=1., value=mu)
 
@@ -37,6 +42,8 @@ catalina_hits   = Poisson('catalina_hits', mu=catalina_mean,
                           value=catalina_array, observed=True)
 panstarrs_hits  = Poisson('panstarrs_hits', mu=panstarrs_mean,
                           value=panstarrs_array, observed=True)
+neowise_hits    = Poisson('neowise_hits', mu=neowise_mean,
+                          value=neowise_array, observed=True)
 other_hits      = Poisson('other_hits', mu=other_mean,
                           value=other_array, observed=True)
 
@@ -44,6 +51,7 @@ linear_next     = Poisson('linear_next', mu=linear_mean)
 spacewatch_next = Poisson('spacewatch_next', mu=spacewatch_mean)
 catalina_next   = Poisson('catalina_next', mu=catalina_mean)
 panstarrs_next  = Poisson('panstarrs_next', mu=panstarrs_mean)
+neowise_next    = Poisson('neowise_next', mu=neowise_mean)
 other_next      = Poisson('other_next', mu=other_mean)
 
 @deterministic()
@@ -51,8 +59,9 @@ def allof2014(lin=linear_next,
                 sw=spacewatch_next,
                 cata=catalina_next,
                 pan=panstarrs_next,
+                neo=neowise_next,
                 oth=other_next):
-    return 6 + lin + sw + cata + pan + oth
+    return 8 + lin + sw + cata + pan + neo + oth
 
 @deterministic()
 def le10(count=allof2014):
@@ -77,7 +86,7 @@ def gt60(count=allof2014):
 import pymc
 model = pymc.Model([le10, r11_20, r21_40, r41_60, gt60, allof2014,
                     linear_next, spacewatch_next, catalina_next,
-                    panstarrs_next, other_next
+                    panstarrs_next, other_next, neowise_next
                 ])
 M = pymc.MCMC(model)
 M.sample(iter=60000, burn=5000)

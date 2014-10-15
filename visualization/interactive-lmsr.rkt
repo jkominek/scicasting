@@ -10,7 +10,17 @@
 (require racket/gui/base
          racket/class
          racket/math
-         plot)
+         (except-in plot function))
+
+(define (function f lo_ hi_ #:color [color (line-color)] #:label [label #f])
+  (define lo (+ lo_ 0.001))
+  (define hi (- hi_ 0.001))
+  (define steps (exact-round (+ 2 (/ (- hi lo) 0.01))))
+  (lines (for/list ([i (in-range 0 (add1 steps))])
+	   (let ([x (+ lo (* (- hi lo) (/ i steps)))])
+	     (vector x (f x))))
+	 #:color color
+	 #:label label))
 
 (define f
   (new frame% [label "LMSR Visualization"] [width 1280] [height 720]))
@@ -69,9 +79,9 @@
   ; Top left
   (plot/dc
    (list*
-    (function (lambda (x) (lmsr-outcome start x)) 0.001 0.999
+    (function (lambda (x) (lmsr-outcome start x)) 0.0 1.0
               #:color "green")
-    (function (lambda (x) (lmsr-outcome (- 1.0 start) (- 1.0 x))) 0.001 0.999
+    (function (lambda (x) (lmsr-outcome (- 1.0 start) (- 1.0 x))) 0.0 1.0
               #:color "red")
     (point-label (vector 0.25 (lmsr-outcome start 0.25)) "Yes" #:anchor 'right)
     (point-label (vector 0.75 (lmsr-outcome (- 1.0 start) 0.25)) "No")
@@ -90,7 +100,7 @@
    #:x-min 0.0
    #:x-max 1.0
    #:x-label ""
-   #:y-label "-Cost"
+   #:y-label "Credit"
    #:y-min -500
    #:y-max (+ 50 (max (lmsr-outcome start 0.999)
                       (lmsr-outcome (- 1 start) 0.999))))
@@ -103,7 +113,7 @@
        (+ (* belief (lmsr-outcome start x))
           (* (- 1.0 belief)
              (lmsr-outcome (- 1.0 start) (- 1.0 x)))))
-     0.001 0.999)
+     0.0 1.0)
     (let ([v (+ (* belief (lmsr-outcome start trade-to))
                 (* (- 1.0 belief)
                    (lmsr-outcome (- 1.0 start) (- 1.0 trade-to))))])
@@ -129,11 +139,11 @@
    (list*
     (function
      (lambda (x) (odds start x))
-     start 0.999
+     start 1.0
      #:label "Yes" #:color "green")
     (function
      (lambda (x) (odds (- 1 start) (- 1 x)))
-     0.001 start
+     0.0 start
      #:label "No" #:color "red")
     (if (= trade-to start)
         (point-label (vector -100 -100) "")
@@ -164,13 +174,13 @@
                        (* (- 1.0 belief)
                           (lmsr-outcome (- 1.0 start) (- 1.0 x))))
                     (odds start x)))
-     start 0.999 #:label "Yes" #:color "green")
+     start 1.0 #:label "Yes" #:color "green")
     (function
      (lambda (x) (* (+ (* belief (lmsr-outcome start x))
                        (* (- 1.0 belief)
                           (lmsr-outcome (- 1.0 start) (- 1.0 x))))
                     (odds (- 1 start) (- 1 x))))
-     0.001 start #:label "No" #:color "red")
+     0.0 start #:label "No" #:color "red")
     (if (= trade-to start)
         (point-label (vector -100 -100) "")
         (let ([v (if (< trade-to start)

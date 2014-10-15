@@ -19,5 +19,10 @@ def hit15(storms=storms_next):
 model = Model([hit15, storms_next])
 
 M = MCMC(model)
-M.sample(iter=50000, burn=5000)
+M.sample(iter=75000, burn=5000)
 M.summary()
+
+f = open("trace","w")
+for v in M.trace('storms_next'):
+    f.write("%f\n" % (v,))
+f.close()

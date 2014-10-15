@@ -10,7 +10,7 @@
          math/distributions
          plot)
 
-(define d (poisson-dist 11))
+(define d (poisson-dist 8))
 
 (define (p-next d v)
   (/ (- 1 (cdf d (+ v 1)))

@@ -147,7 +147,7 @@ def do_split_weekday_model():
 #M.summary()
 #print "DIC", M.dic
 
-def do_weekday_model():
+def do_weekday_model(target, future_limit):
     tau = Uniform('tau', lower=tau_lower, upper=tau_upper, plot=False)
 
     weekday = np.empty(7, dtype=object)
@@ -169,63 +169,27 @@ def do_weekday_model():
 
     y_hat = Normal('y_hat', mu=y_est, tau=tau, value=y, observed=True, plot=False)
 
-    x_future = range(len(x), 243)
+    x_future = range(len(x), future_limit)
     l_x = len(x_future)
-    @deterministic(plot=False)
-    def y_future(intercept=intercept, slope=slope,
-                 x=x_future, weekday=weekday):
-        out = np.zeros(l_x, dtype=np.float64)
-        for i in range(0, l_x):
-            xf = x_future[i]
-            out[i] = intercept + slope * xf + weekday[xf % 7]
-        return out
-
-    #@deterministic
-    #def june_4(y=y_future):
-    #    for i in range(0, l_x):
-    #        xf = x_future[i]
-    #        if xf <= 180 and y[i]>4.0:
-    #            return True
-    #    return False
-
-    #@deterministic
-    #def july_4(y=y_future):
-    #    for i in range(0, l_x):
-    #        xf = x_future[i]
-    #        if y[i]>4.0:
-    #            if xf <= 181:
-    #                return False
-    #            if xf <= 211:
-    #                return True
-    #    return False
-
-    #@deterministic
-    #def august_4(y=y_future):
-    #    for i in range(0, l_x):
-    #        xf = x_future[i]
-    #        if y[i]>4.0:
-    #            if xf <= 212:
-    #                return False
-    #            if xf <= 242:
-    #                return True
-    #    return False
 
     @deterministic
-    def first_day(y=y_future):
+    def first_day(intercept=intercept, slope=slope,
+                  x=x_future, weekday=weekday):
         for i in range(0, l_x):
             xf = x_future[i]
-            if y[i]>4.0:
+            v = intercept + slope * xf + weekday[xf % 7]
+            if v > target:
                 return xf
-        return 244
+        return future_limit+1
 
     model = Model([y_hat, y_est, tau,
                    intercept, slope, #june_4, july_4, august_4,
                    first_day])
     M = MCMC(model)
-    M.sample(iter=60000, burn=5000)
+    M.sample(iter=25000, burn=2500)
     return M
 
-M = do_weekday_model()
+M = do_weekday_model(4.0, 365)
 M.summary()
 print "DIC", M.dic
 
@@ -235,8 +199,10 @@ for day in trace:
     counts[day] = 1 + counts.get(day, 0)
 days = sorted(counts.keys(), key=lambda k: counts[k], reverse=True)
 total = float(len(trace))
-for d in days[0:20]:
+for d in sorted(days[0:20]):
+    y = d // 365
+    doy = d % 365
     # our days of year were 0-indexed, instead of the normal
     # 1-indexed. bump them up for human display
-    print "%i %.2f" % (d+1, counts[d]/total*100.0)
-
+    dt = date(2014+y, 1, 1) + timedelta(doy)
+    print "%s %.2f" % (dt.isoformat(), counts[d]/total*100.0)
