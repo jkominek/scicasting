@@ -18,7 +18,7 @@
 # TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
 # PERFORMANCE OF THIS SOFTWARE.
 
-# You'll need an account, and an API key.
+# You'll need an account, an API key, and you'll need to know your user ID.
 # If you modify this to make trades automatically, keep in mind the
 # site's user agreement, and don't be a jerk. Rate limit your access
 # to the site.
@@ -33,6 +33,9 @@ import os.path
 import sys
 import gzip
 import math
+import sqlite3
+import time
+from datetime import datetime
 from StringIO import StringIO
 from optparse import OptionParser
 
@@ -43,13 +46,26 @@ parser = OptionParser()
 
 #parser.add_option("-b", action="store_true", default=False,
 #                  dest="back_out", help="Back out of existing position?")
+parser.add_option("-a", action="store_true", default=False,
+                  dest="autouse_db", help="Automatically use DB; don't query user")
 (options, args) = parser.parse_args()
 
 API_KEY_filename = os.path.expanduser("~/scicast_apikey.txt")
 if not os.access(API_KEY_filename, os.R_OK):
-    print "Make sure your API key is in", API_KEY_filename
+    print "Make sure your user ID and API key are in", API_KEY_filename
     sys.exit(-1)
-API_KEY = open(API_KEY_filename).read().strip()
+USER_ID, API_KEY = [ s.strip() for s in open(API_KEY_filename).readlines() ]
+
+DB_filename = os.path.expanduser("~/scicast_opinions.db")
+DB_exists = os.access(DB_filename, os.R_OK)
+DB = sqlite3.connect(DB_filename)
+DB_cursor = DB.cursor()
+if not DB_exists:
+    DB_cursor.execute("create table opinions (question int primary key, likelihoods text, max_debt numeric)")
+    DB.commit()
+
+LAST_TRADE = datetime(2000,1,1,0,0,0)
+INTERTRADE_DELAY = 20.0
 
 # Wraps up all of the HTTP action in a single place. Applies
 # the API key, ensures we're gzip'ing things, and leaves you
@@ -77,14 +93,15 @@ def fetch_url(path, args, host="test.scicast.org", ssl=False):
 # Take an array of trade records, count them, total up your
 # assets, and find the current state of the market. Return
 # all of that.
-def summarize_trades(ts):
+def summarize_trades(ts, current_probs):
+    trade_count = len(ts)
+    if trade_count == 0:
+        return (0, [ 0.0 for p in current_probs ])
     ts.sort(key=lambda t: t['created_at'])
     assets = ts[0]['assets_per_option']
     for t in ts[1:]:
         assets = map(lambda a,b: a+b, assets, t['assets_per_option'])
-    trade_count = len(ts)
-    current_probs = ts[-1]['new_value_list']
-    return (trade_count, current_probs, assets)
+    return (trade_count, assets)
 
 def normalize_probabilities(likelihoods):
     total = float(sum(likelihoods))
@@ -148,16 +165,29 @@ question_ids = map(int, args)
 print "Processing question IDs:", ", ".join(map(str, question_ids))
 
 for qid in question_ids:
+    # get the question info
+    q = fetch_url("questions/show",
+                  {'question_id': qid,
+                   'include_prob': True,
+                   'include_comments': False,
+                   'include_trades': False,
+                   'include_recommendations': False})
+    # we need to use this later for checking which options
+    # are locked, determining if the question is continuous, etc
+
     # get all of our trades on this question, so we know what
     # our assets are
     ts = fetch_url("trades/index",
                    {'question_id': qid,
-                    'include_current_probs': True,
+                    'user_id': USER_ID,
+                    'include_current_probs': False,
                     'summary_view_only': True
                 })
 
-    trade_count, current_probs, assets = summarize_trades(ts)
-    print "Question #%i: %s" % (qid, ts[0]['question']['name'])
+    current_probs = q['prob']
+    q = q['question']
+    trade_count, assets = summarize_trades(ts, current_probs)
+    print "Question #%i: %s" % (qid, q['name'])
     print "Probabilities: ", \
         ", ".join([ "%.2f%%" % (p*100.0,) for p in current_probs ])
 
@@ -170,26 +200,46 @@ for qid in question_ids:
     print "  Your assets: ", \
         ", ".join([ "%.1f" % (a,) for a in assets ])
 
-    # For added convenience, you could look the beliefs up from a database
+
     # Additional ideas:
     #  - make the beliefs a function of time
     #  - query some web pages, do some math
     #  - https://github.com/eBay/bayesian-belief-networks
+    DB_cursor.execute("select likelihoods, max_debt from opinions where question=?", (qid,))
+    result = DB_cursor.fetchone()
+    query_beliefs = True
 
-    beliefs = [ ]
-    while len(beliefs) != len(current_probs):
-        raw_belief = raw_input("Beliefs? ")
-        try:
-            lhs = map(float, raw_belief.split())
-            beliefs = normalize_probabilities(lhs)
-        except Exception, e:
-            print e
+    if result != None:
+        raw_belief, debt = result
+        beliefs = map(float, raw_belief.split())
+        debt = float(debt)
 
-    # and maybe compute this based on the strength of your belief, and
-    # the time until question resolution
+        print "\n*** from DB:"
+        print "Prior Beliefs: ", \
+            ", ".join([ "%.2f" % (p,) for p in beliefs ])
+        beliefs = normalize_probabilities(beliefs)
+        print "     Max debt: %f" % (-debt,)
+        if options.autouse_db:
+            query_beliefs = False
+        else:
+            use_s = raw_input("Use? ")
+            if len(use_s)>0 and use_s.lower()[0] != 'n':
+                query_beliefs = False
 
-    debt = raw_input("Maximum debt? ")
-    debt = -float(debt)
+    if query_beliefs:
+        beliefs = [ ]
+        while len(beliefs) != len(current_probs):
+            raw_belief = raw_input("Beliefs? ")
+            try:
+                lhs = map(float, raw_belief.split())
+                beliefs = normalize_probabilities(lhs)
+            except Exception, e:
+                print e
+
+        # and maybe compute this based on the strength of your belief, and
+        # the time until question resolution
+        debt = raw_input("Maximum debt? ")
+        debt = -float(debt)
 
     # This is just a simple EV maximization utility function
     # you can swap it out with whatever you want. at a minimum
@@ -268,18 +318,43 @@ for qid in question_ids:
     # your credit/debit as you move the slider around
     credit_debit = min(final) - min(assets)
     if credit_debit >= 0.0:
-        print "       Credit: %.3f" % (credit_debit,)
+        print "       Credit:  %.3f" % (credit_debit,)
     else:
-        print "        Debit: %.3f" % (-credit_debit,)
+        print "        Debit:  %.3f" % (-credit_debit,)
+
+    # we're using a minimizer, so we actually get loss
+    # from the function, so flip it for the user
+    orig_utility = (-util(current_probs))
+    new_utility = (-util(target))
+    print " Orig utility: ", orig_utility
+    print "  New utility: ", new_utility
+    print "  Util change: ", new_utility - orig_utility
+
+    if (new_utility - orig_utility) < (orig_utility * 0.001):
+        # less than a 0.1% increase in utility
+        # don't waste the server's time
+        print "not worth executing; skipping!"
+        continue
 
     # check with the user.
     # enter anything start with 'y' to make the trade
-    execute_p = raw_input("Execute trade? ")
-    if not (len(execute_p)>0 and execute_p.lower()[0]=='y'):
-        print "ok, skipping it!"
-        continue
+    if query_beliefs or (not options.autouse_db):
+        execute_p = raw_input("Execute trade? ")
+        if not (len(execute_p)>0 and execute_p.lower()[0]=='y'):
+            print "ok, skipping it!"
+            continue
 
-    print "Executing trade!"
+    print "Saving beliefs..."
+    DB_cursor.execute("insert or replace into opinions values (?, ?, ?)",
+                      (qid, raw_belief, debt))
+    DB.commit()
+
+    delay = INTERTRADE_DELAY - (datetime.now() - LAST_TRADE).total_seconds()
+    if delay <= 0.0:
+        print "Executing trade!"
+    else:
+        print "Executing trade in %.2fs..." % (delay,)
+        time.sleep(delay)
     ts = fetch_url("trades/create",
                    {'question_id': qid,
                     # the 0.0001 is there in case of any
@@ -292,6 +367,7 @@ for qid in question_ids:
                     'interface_type': 0,
                     'user_selection': 0,
                 })
+    LAST_TRADE = datetime.now()
 
     # here's what scicast says about your trade:
     print " Asset change: ", \
